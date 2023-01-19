@@ -1,0 +1,23 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class {{ class }} extends Controller
+{
+    public function index(){
+
+    }
+    public function insert(){
+
+    }
+    public function edit(){
+
+    }
+    public function update(){
+        
+    }
+}
