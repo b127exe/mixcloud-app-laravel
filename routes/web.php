@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SongVideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard',function(){
-    return view('layouts.dashboard.dashboard');
+Route::group(["prefix" => "dashboard"],function(){
+  Route::get('/',[SongVideoController::class , 'index']);
+  Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
 });

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{url('/css/app-light.css')}}" id="lightTheme">
     <link rel="stylesheet" href="{{url('/css/app-dark.css')}}" id="darkTheme" disabled>
   </head>
-  <body class="vertical  light  ">
+  <body class="vertical light">
     <div class="wrapper">
       <nav class="topnav navbar navbar-light">
         <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
@@ -65,27 +65,22 @@
           </li>
         </ul>
       </nav>
-      <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
-        <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
+      
+     <!-- SideBar Start -->
+     <aside class="sidebar-left border-right bg-white shadow" id="leftSidebar" data-simplebar>
+      <a href="#" class="btn collapseSidebar toggle-btn d-lg-none text-muted ml-2 mt-3" data-toggle="toggle">
           <i class="fe fe-x"><span class="sr-only"></span></i>
         </a>
         <nav class="vertnav navbar navbar-light">
           <!-- nav bar -->
           <div class="w-100 mb-4 d-flex">
-            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
-              <svg version="1.1" id="logo" class="navbar-brand-img brand-sm" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 120 120" xml:space="preserve">  
-                <g>
-                  <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
-                  <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
-                  <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
-                </g>
-              </svg>
-              {{-- <img src="{{url('/assets/logo/logo-1.png')}}" width="80"> --}}
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="">
+              <img src="{{url('/assets/logo/logo-1.png')}}" width="50">
             </a>
-          </div>
+          </div>    
           <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item ">
-              <a href="" aria-expanded="false" class="nav-link">
+              <a href="/dashboard" aria-expanded="false" class="nav-link">
                 <i class="fe fe-home fe-16"></i>
                 <span class="ml-3 item-text">Dashboard</span><span class="sr-only">(current)</span>
               </a>
@@ -103,15 +98,15 @@
               </a> 
               <ul class="collapse list-unstyled pl-4 w-100" id="artist">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Album</span>
+                  <a class="nav-link pl-3" href="/dashboard/add-artist"><span class="ml-1 item-text">Add Artist</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Album</span>
+                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Artist</span>
                   </a>
                 </li>               
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Albums</span>
+                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Artist</span>
                   </a>
                 </li>               
               </ul>
@@ -140,59 +135,11 @@
                   </a>
                 </li>               
               </ul>
-          </li>         
-          </ul>
-          <p class="text-muted nav-heading mt-4 mb-1">
-            <span>Music Component</span>
-          </p>
-          <ul class="navbar-nav flex-fill w-100 mb-2">
-            <li class="nav-item dropdown">
-              <a href="#music" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-music fe-16"></i>
-                <span class="ml-3 item-text">Song</span>
-              </a> 
-              <ul class="collapse list-unstyled pl-4 w-100" id="music">
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Song</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Song</span>
-                  </a>
-                </li>               
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Songs</span>
-                  </a>
-                </li>               
-              </ul>
-          </li>         
-          </ul>
-          <p class="text-muted nav-heading mt-4 mb-1">
-            <span>Video Components</span>
-          </p>
-          <ul class="navbar-nav flex-fill w-100 mb-2">
-            <li class="nav-item dropdown">
-              <a href="#video" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-youtube fe-16"></i>
-                <span class="ml-3 item-text">Video</span>
-              </a> 
-              <ul class="collapse list-unstyled pl-4 w-100" id="video">
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Video</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Video</span>
-                  </a>
-                </li>               
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Videos</span>
-                  </a>
-                </li>               
-              </ul>
-          </li>         
+          </li>             
           </ul>
 
+          @yield('sidebar')
+          
           <p class="text-muted nav-heading mt-4 mb-1">
             <span>Playlist Components</span>
           </p>
@@ -204,15 +151,15 @@
               </a> 
               <ul class="collapse list-unstyled pl-4 w-100" id="play">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Album</span>
+                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Playlist</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Album</span>
+                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Playlist</span>
                   </a>
                 </li>               
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Albums</span>
+                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Playlist</span>
                   </a>
                 </li>               
               </ul>
@@ -220,7 +167,7 @@
           </ul>
           
           
-
+        
           <p class="text-muted nav-heading mt-4 mb-1">
             <span>Documentation</span>
           </p>
@@ -237,8 +184,10 @@
               <i class="fe fe-shopping-cart fe-12 mx-2"></i><span class="small">Buy now</span>
             </a>
           </div>
+          
         </nav>
-      </aside>
+    </aside>
+
      <!-- SideBar End -->
 
      <!-- Main Start -->
@@ -545,7 +494,7 @@
         });
       }
     </script>
-    <script src="js/apps.js"></script>
+    <script src="{{url('/js/apps.js')}}"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
     <script>
