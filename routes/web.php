@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::group(["prefix" => "dashboard"],function(){
   Route::get('/',[SongVideoController::class , 'index']);
   Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
+  Route::post('/artist-store',[SongVideoController::class , 'artistStore']);
 });

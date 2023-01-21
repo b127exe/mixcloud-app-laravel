@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    {{-- <link rel="icon" href="favicon.ico"> --}}
     <title>Mixcloud | Dashboard</title>
+
+    {{-- CSRF token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{url('/css/simplebar.css')}}">
     <!-- Fonts CSS -->
@@ -291,6 +295,11 @@
     <script src='{{url('/js/dropzone.min.js')}}'></script>
     <script src='{{url('/js/uppy.min.js')}}'></script>
     <script src='{{url('/js/quill.min.js')}}'></script>
+    {{-- <script src='{{url('/ajax/ajax.min.js')}}'></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    @yield('script')
     <script>
       $('.select2').select2(
       {
