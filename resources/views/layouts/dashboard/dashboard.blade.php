@@ -9,7 +9,7 @@
     <title>Mixcloud | Dashboard</title>
 
     {{-- CSRF token --}}
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{url('/css/simplebar.css')}}">
@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{{url('/css/feather.css')}}">
+    <link rel="stylesheet" href="{{url('/css/dataTables.bootstrap4.css')}}">
     <link rel="stylesheet" href="{{url('/css/select2.css')}}">
     <link rel="stylesheet" href="{{url('/css/dropzone.css')}}">
     <link rel="stylesheet" href="{{url('/css/uppy.min.css')}}">
@@ -104,13 +105,9 @@
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="/dashboard/add-artist"><span class="ml-1 item-text">Add Artist</span>
                   </a>
-                </li>
+                </li>             
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Artist</span>
-                  </a>
-                </li>               
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Artist</span>
+                  <a class="nav-link pl-3" href="/dashboard/sort-artist"><span class="ml-1 item-text">Sort Artist</span>
                   </a>
                 </li>               
               </ul>
@@ -127,11 +124,7 @@
               </a> 
               <ul class="collapse list-unstyled pl-4 w-100" id="album">
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Album</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Album</span>
+                  <a class="nav-link pl-3" href="/dashboard/add-album"><span class="ml-1 item-text">Add Album</span>
                   </a>
                 </li>               
                 <li class="nav-item">
@@ -156,10 +149,6 @@
               <ul class="collapse list-unstyled pl-4 w-100" id="play">
                 <li class="nav-item">
                   <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Playlist</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Update Playlist</span>
                   </a>
                 </li>               
                 <li class="nav-item">
@@ -278,6 +267,8 @@
     <script src="{{url('/js/datamaps-zoomto.js')}}"></script>
     <script src="{{url('/js/datamaps.custom.js')}}"></script>
     <script src="{{url('/js/Chart.min.js')}}"></script>
+    <script src="{{url('/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>
       /* defind global options */
       Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
@@ -287,29 +278,29 @@
     <script src="{{url('/js/jquery.sparkline.min.js')}}"></script>
     <script src="{{url('/js/apexcharts.min.js')}}"></script>
     <script src="{{url('/js/apexcharts.custom.js')}}"></script>
-    <script src='{{url('/js/jquery.mask.min.js')}}'></script>
-    <script src='{{url('/js/select2.min.js')}}'></script>
-    <script src='{{url('/js/jquery.steps.min.js')}}'></script>
-    <script src='{{url('/js/jquery.validate.min.js')}}'></script>
-    <script src='{{url('/js/jquery.timepicker.js')}}'></script>
-    <script src='{{url('/js/dropzone.min.js')}}'></script>
-    <script src='{{url('/js/uppy.min.js')}}'></script>
-    <script src='{{url('/js/quill.min.js')}}'></script>
-    {{-- <script src='{{url('/ajax/ajax.min.js')}}'></script> --}}
+    <script src="{{url('/js/jquery.mask.min.js')}}"></script>
+    {{-- <script src="{{url('/js/select2.min.js')}}"></script> --}}
+    <script src="{{url('/js/jquery.steps.min.js')}}"></script>
+    <script src="{{url('/js/jquery.validate.min.js')}}"></script>
+    <script src="{{url('/js/jquery.timepicker.js')}}"></script>
+    <script src="{{url('/js/dropzone.min.js')}}"></script>
+    <script src="{{url('/js/uppy.min.js')}}"></script>
+    <script src="{{url('/js/quill.min.js')}}"></script>
+    <script src='{{url('/ajax/ajax.min.js')}}'></script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
 
     @yield('script')
-    <script>
-      $('.select2').select2(
-      {
-        theme: 'bootstrap4',
-      });
-      $('.select2-multi').select2(
-      {
-        multiple: true,
-        theme: 'bootstrap4',
-      });
+    <script>      
+        $('.select2').select2(
+          {
+            theme: 'bootstrap4',
+          });
+          $('.select2-multi').select2(
+            {
+              multiple: true,
+              theme: 'bootstrap4',
+            });  
       $('.drgpicker').daterangepicker(
       {
         singleDatePicker: true,

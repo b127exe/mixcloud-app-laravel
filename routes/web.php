@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix" => "dashboard"],function(){
   Route::get('/',[SongVideoController::class , 'index']);
+  //Artist Routes
   Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
   Route::post('/artist-store',[SongVideoController::class , 'artistStore']);
+  Route::get('/sort-artist',[SongVideoController::class , 'artistSort']);
+  Route::get('/delete-artist/{id}',[SongVideoController::class , 'artistDelete']);
+  //Album Routes
+  Route::get('/add-album',[SongVideoController::class , 'addAlbum']);
+  Route::post('/album-store',[SongVideoController::class , 'albumStore']);
 });

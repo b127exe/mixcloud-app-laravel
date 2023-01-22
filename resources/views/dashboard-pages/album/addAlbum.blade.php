@@ -63,7 +63,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, #8b2cff, #5C00CE);
-            border-radius: 50%;
+            border-radius: 10%;
             border: 3px solid #fff;
             text-align: center;
             cursor: pointer;
@@ -76,7 +76,7 @@
             display: none;
         }
 
-        .profile .fe-user {
+        .profile .fe-image {
             font-size: 12rem;
             color: rgb(212, 212, 212);
         }
@@ -87,8 +87,8 @@
 
         .profile .fe-camera {
             position: absolute;
-            bottom: 0;
-            right: 15px;
+            bottom: 8px;
+            right: 8px;
             background: #fff;
             color: #333;
             line-height: normal;
@@ -103,10 +103,11 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show d-none" role="alert">
-                    <strong class="text-dark">Your record add successfully</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+                    <strong class="text-dark">Your record add successfully</strong><button type="button" class="close"
+                        data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
-                  </div>
+                </div>
                 <h2 class="page-title">Add Artist</h2>
                 <p class="text-muted">Fill the below form</p>
                 <div class="row">
@@ -116,34 +117,47 @@
                                 <strong class="card-title">Artist</strong>
                             </div>
                             <div class="card-body">
-                                <form action="{{url('/dashboard/artist-store')}}" method="POST" class="needs-validation" id="AddArtistForm" enctype="multipart/form-data">
+                                <form action="{{ url('/dashboard/album-store') }}" method="POST" class="needs-validation"
+                                    id="AddAlbumForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="alert alert-warning d-none" role="alert" id="save_error"></div>
                                     <div class="form-row justify-content-center">
                                         <div class="profile">
                                             <label>
-                                                <span class="fe fe-user"></span>
+                                                <span class="fe fe-image"></span>
                                                 <span class="fe fe-camera"></span>
-                                                <input type="file" class="image-input" name="image">
+                                                <input type="file" class="image-input" name="coverImage">
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12 mb-3">
-                                            <label>Name</label>
-                                            <input type="text" class="form-control" name="name"
-                                                placeholder="Enter your name">
+                                            <label>Album Name</label>
+                                            <input type="text" class="form-control" name="coverName"
+                                                placeholder="Enter album name">
                                             <div class="valid-feedback"> Looks good! </div>
                                         </div>
                                     </div>
-                                    <div class="custom-control custom-checkbox mb-3">
-                                        <input type="checkbox" class="custom-control-input" id="customControlValidation16"
-                                            >
-                                        <label class="custom-control-label" for="customControlValidation16"> Agree to terms
-                                            and conditions</label>
-                                        <div class="invalid-feedback"> You must agreed before submitting. </div>
-                                    </div>
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                     <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="simple-select2">Select Artist</label>
+                                            <select class="form-control select2" name="artist" id="simple-select2">
+                                              @foreach ($artist as $item)
+                                                  <option value="{{$item->artist_id}}">{{$item->artist_name}}</option>
+                                              @endforeach
+                                            </select>
+                                          </div>
+                                     </div>
+
+                                        <div class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="customControlValidation16">
+                                            <label class="custom-control-label" for="customControlValidation16"> Agree to
+                                                terms
+                                                and conditions</label>
+                                            <div class="invalid-feedback"> You must agreed before submitting. </div>
+                                        </div>
+                                       <button class="btn btn-primary" type="submit">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -159,22 +173,23 @@
             let files = e.target.files[0];
             let url = URL.createObjectURL(files);
             image_label.style.background = `url(${url}) center / cover`;
-            image_label.querySelector('.fe-user').style.display = "none";
+            image_label.querySelector('.fe-image').style.display = "none";
         }
     </script>
 @endsection
 @section('script')
+<script src="/js/select2.min.js"></script>
 <script>
     $(document).ready(function () {
-       $(document).on("submit", "#AddArtistForm", function (e) {
+       $(document).on("submit", "#AddAlbumForm", function (e) {
            
            e.preventDefault();
 
-           let formData = new FormData($('#AddArtistForm')[0]);
+           let formData = new FormData($('#AddAlbumForm')[0]);
 
            $.ajax({
                method: "post",
-               url: "/dashboard/artist-store",
+               url: "/dashboard/album-store",
                data: formData,
                contentType: false,
                processData: false,
@@ -196,9 +211,9 @@
                     $('#save_error').html("");
                     $('#save_error').addClass("d-none");
                     // this.reset();
-                    $('#AddArtistForm').find('input').val('');
+                    $('#AddAlbumForm').find('input').val('');
                     image_label.style.background = `none`;
-                    image_label.querySelector('.fe-user').style.display = "block";
+                    image_label.querySelector('.fe-image').style.display = "block";
                     $(".alert-success").removeClass('d-none');
                  }
 
