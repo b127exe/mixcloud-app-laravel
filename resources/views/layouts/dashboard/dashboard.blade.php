@@ -128,7 +128,7 @@
                   </a>
                 </li>               
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Albums</span>
+                  <a class="nav-link pl-3" href="/dashboard/sort-album"><span class="ml-1 item-text">Sort Albums</span>
                   </a>
                 </li>               
               </ul>

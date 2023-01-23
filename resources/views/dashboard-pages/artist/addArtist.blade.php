@@ -197,7 +197,7 @@
                     $('#save_error').addClass("d-none");
                     // this.reset();
                     $('#AddArtistForm').find('input').val('');
-                    image_label.style.background = `none`;
+                    image_label.style.background = `linear-gradient(45deg, #8b2cff, #5C00CE)`;
                     image_label.querySelector('.fe-user').style.display = "block";
                     $(".alert-success").removeClass('d-none');
                  }

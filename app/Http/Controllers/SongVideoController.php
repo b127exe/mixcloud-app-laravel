@@ -142,4 +142,28 @@ class SongVideoController extends Controller
 
    }
 
+   public function albumSort(Request $request){
+
+    $search = $request['search'];
+
+    $artist = Artist::all();
+    $album = DB::table('albums')->join("artists","albums.artist_id","=","artists.artist_id")->select('albums.*','artists.*')->where("album_name",'like',"%$search%")->get();
+    return view('dashboard-pages.album.sortAlbum',compact('artist','album'));
+
+   }
+
+   public function albumDelete($id){
+
+      $album = Album::find($id);
+
+      if($album != null){
+
+        unlink('storage/album-covers/'.$album->cover_picture);
+        $album->delete();
+        return redirect('/dashboard/sort-album');
+
+      }
+
+   }
+
 }
