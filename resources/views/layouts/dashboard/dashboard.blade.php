@@ -29,6 +29,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{{url('/css/app-light.css')}}" id="lightTheme">
     <link rel="stylesheet" href="{{url('/css/app-dark.css')}}" id="darkTheme" disabled>
+    @yield('link')
   </head>
   <body class="vertical light">
     <div class="wrapper">

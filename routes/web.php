@@ -29,4 +29,5 @@ Route::group(["prefix" => "dashboard"],function(){
   //Songs Routes
   Route::get('/add-song',[SongVideoController::class, 'addSong']);
   Route::post('/song-store',[SongVideoController::class, 'songStore']);
+  Route::get('/sort-song',[SongVideoController::class, 'songSort']);
 });

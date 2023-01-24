@@ -224,5 +224,12 @@ class SongVideoController extends Controller
       }
 
    }
+   
+   public function songSort(){
+
+      $artist = Artist::all();
+      return view('dashboard-pages.song.sortSong',compact("artist"));
+
+   }
 
 }

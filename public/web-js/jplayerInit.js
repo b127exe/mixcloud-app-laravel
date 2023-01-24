@@ -54,7 +54,7 @@
 			}
 		});
 	}
-	setInterval(currentTimeAlign, 10);
+	setInterval(currentTimeAlign , 10);
 	
 
 	
