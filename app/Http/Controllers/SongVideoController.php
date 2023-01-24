@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -162,6 +163,64 @@ class SongVideoController extends Controller
         $album->delete();
         return redirect('/dashboard/sort-album');
 
+      }
+
+   }
+
+   //SONGS code start
+   public function addSong(){
+
+     $artist = Artist::all();
+     $album = Album::all();
+     return view('dashboard-pages.song.addSong',compact('artist','album'));
+
+   }
+   public function songStore(Request $request){
+
+      $validator = Validator::make($request->all(),[
+         'title' => 'required|max:50',
+         'lyrics' => 'required',
+         'track' => 'required',
+         'genre' => 'required',
+         'duration' => 'required',
+         'artist' => 'required',
+         'album' => 'required',
+         'song' => 'required',
+      ]);
+
+      if($validator->fails()){
+         return response()->json([
+            
+            'status'=>400,
+            'errors'=>$validator->messages()
+
+          ]);
+      }
+      else{
+         $song = new Song;
+         $song->title = $request->input('title');
+         $song->lyrics = $request->input('lyrics');
+         $song->track = $request->input('track');
+         $song->mtime = $request->input('duration');
+         $song->album_id = $request->input('album');
+         $song->artist_id = $request->input('artist');
+         $song->genre = $request->input('genre');
+
+         if($request->hasFile('song')){
+            $songs = $request->file('song');
+           $songName = $songs->getClientOriginalName();
+           $songName = Str::random(8).$songName;
+           $songs->move('storage/songs/',$songName);
+           $song->song_path = $songName;
+         }
+
+         $song->save();
+         return response()->json([
+            
+            'status'=>200,
+            'message'=>"Add Successfully"
+
+          ]);
       }
 
    }

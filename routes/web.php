@@ -26,4 +26,7 @@ Route::group(["prefix" => "dashboard"],function(){
   Route::post('/album-store',[SongVideoController::class , 'albumStore']);
   Route::get('/sort-album',[SongVideoController::class , 'albumSort']);
   Route::get('/delete-album/{id}',[SongVideoController::class , 'albumDelete']);
+  //Songs Routes
+  Route::get('/add-song',[SongVideoController::class, 'addSong']);
+  Route::post('/song-store',[SongVideoController::class, 'songStore']);
 });
