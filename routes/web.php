@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(["prefix" => "dashboard"],function(){
-  Route::get('/',[SongVideoController::class , 'index']);
+  Route::post('/',[SongVideoController::class , 'index']);
   //Artist Routes
   Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
   Route::post('/artist-store',[SongVideoController::class , 'artistStore']);
@@ -30,4 +30,8 @@ Route::group(["prefix" => "dashboard"],function(){
   Route::get('/add-song',[SongVideoController::class, 'addSong']);
   Route::post('/song-store',[SongVideoController::class, 'songStore']);
   Route::get('/sort-song',[SongVideoController::class, 'songSort']);
+  Route::get('/delete-song/{id}',[SongVideoController::class, 'songDelete']);
+  //Video Routes
+  Route::get('/add-video',[SongVideoController::class , 'addVideo']);
+  Route::post('/video-store',[SongVideoController::class , 'videoStore']);
 });
