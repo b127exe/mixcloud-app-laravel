@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SongVideoController;
+use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(["prefix" => "dashboard"],function(){
-  Route::post('/',[SongVideoController::class , 'index']);
+  Route::get('/',[SongVideoController::class , 'index']);
   //Artist Routes
   Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
   Route::post('/artist-store',[SongVideoController::class , 'artistStore']);
@@ -34,4 +35,9 @@ Route::group(["prefix" => "dashboard"],function(){
   //Video Routes
   Route::get('/add-video',[SongVideoController::class , 'addVideo']);
   Route::post('/video-store',[SongVideoController::class , 'videoStore']);
+  Route::get('/sort-video',[SongVideoController::class , 'videoSort']);
+});
+
+Route::group(["prefix" => "mixcloud"],function(){
+   Route::get('/',[WebController::class , "index"]);
 });

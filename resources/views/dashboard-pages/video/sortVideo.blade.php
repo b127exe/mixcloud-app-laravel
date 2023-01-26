@@ -2,6 +2,10 @@
 @section('link')
     <link rel="stylesheet" href="/web-css/rockville.css" type="text/css">
     <style>
+        .hero__text {
+            position: relative;
+        }
+
         .hero__text h1 {
             font-size: 50px;
             text-align: center;
@@ -12,26 +16,19 @@
             margin-bottom: 20px;
             margin-top: 22px;
             position: absolute;
-            top: 60px;
+            top: -152px;
             left: 50%;
             transform: translateX(-50%)
         }
 
-        marquee {
+        .hero__text span {
+            background: #000;
+            color: #fff;
+            padding: 4px;
+            border-radius: 4px;
             position: absolute;
-            top: 180px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffffff;
-            font-family: "Overpass", sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            letter-spacing: 2px;
-        }
-        @media only screen (min-width: 700px){
-            marquee{
-                display: none;
-            }
+            bottom: 0px;
+            left: 289px;
         }
     </style>
 @endsection
@@ -73,7 +70,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="/dashboard/sort-video"><span class="ml-1 item-text">Sort Videos</span>
+                        <a class="nav-link pl-3" href="/dashboard/sort-video"><span class="ml-1 item-text">Sort
+                                Videos</span>
                         </a>
                     </li>
                 </ul>
@@ -85,8 +83,8 @@
     <div class="container-fluid">
         <div class="row justify-content-between">
             <div class="col-auto">
-                <h2 class="mb-2 page-title">Songs</h2>
-                <p class="card-text">Go sort any song and apply actions.</p>
+                <h2 class="mb-2 page-title">Videos</h2>
+                <p class="card-text">Go sort any video and apply actions.</p>
             </div>
             <div class="col-auto">
                 <div class="toolbar my-3">
@@ -94,15 +92,8 @@
                         <div class="form-row justify-content-end">
                             <div class="form-group col-auto">
                                 <div class="input-group mb-3">
-                                    <div class="input-group-append">
-                                        <select name="type" class="custom-select" required>
-                                            <option selected>---Select---</option>
-                                            <option value="title">Title</option>
-                                            <option value="genre">Genre</option>
-                                        </select>
-                                    </div>
                                     <input type="text" name="search" class="form-control" required
-                                        placeholder="Search...">
+                                        placeholder="Search by name">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">Search</button>
                                     </div>
@@ -116,7 +107,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="card-columns">
-                    @foreach ($songs as $items)
+                    @foreach ($videos as $items)
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <div class="py-2 mb-2">
@@ -124,8 +115,8 @@
                                         style="border-radius: 4px">
                                     <div class="hero__text">
                                         <h1>{{ $items->album_name }}</h1>
+                                        <span>0{{$items->duration}}:00</span>
                                     </div>
-                                    <marquee width="60%" direction="left">Track #{{ $items->track }}</marquee>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h2>{{ $items->title }}</h2>
@@ -138,19 +129,18 @@
                                             style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(820px, 37px, 0px);">
                                             <a class="dropdown-item" href="#">Edit</a>
                                             <a class="dropdown-item"
-                                                href="{{ url('/dashboard/delete-song') }}/{{ $items->sid }}">Remove</a>
+                                                href="{{ url('/dashboard/delete-video') }}/{{ $items->vid }}">Remove</a>
                                         </div>
                                     </div>
                                 </div>
                                 <p>Album artist: {{ $items->artist_name }}</p>
-                                <p>Genre: {{ $items->genre }}</p>
                                 <div class="d-flex justify-content-between">
                                     <!-- for details -->
                                     <button type="button" class="btn mb-2 btn-primary" data-toggle="modal"
-                                        data-target="#verticalModal{{ $items->sid }}"><span
+                                        data-target="#verticalModal{{ $items->vid }}"><span
                                             class="fe fe-chevrons-up fe-16 mr-2"></span> More Details</button>
                                     <!-- Modal for details -->
-                                    <div class="modal fade" id="verticalModal{{ $items->sid }}" tabindex="-1"
+                                    <div class="modal fade" id="verticalModal{{ $items->vid }}" tabindex="-1"
                                         role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
@@ -165,11 +155,11 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <h2>{{ $items->title }}</h2>
-                                                            <p>Song artist: {{ $items->artist_name }}</p>
+                                                            <p>Video artist: {{ $items->artist_name }}</p>
                                                             <p>Album ● {{ $items->album_name }}</p>
-                                                            <audio
-                                                                src="{{ url('/storage/songs') }}/{{ $items->song_path }}"
-                                                                controls style="width: 100%;"></audio>
+                                                            <video width="100%"
+                                                                src="{{ url('/storage/videos') }}/{{ $items->video_path }}"
+                                                                controls></video>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,15 +175,15 @@
 
                                     <!-- for lyrics -->
                                     <button type="button" class="btn mb-2 btn-primary" data-toggle="modal"
-                                        data-target="#verticalLyricsModal{{ $items->sid }}"><span
+                                        data-target="#verticalLyricsModal{{ $items->vid }}"><span
                                             class="fe fe-clipboard fe-16 mr-2"></span>See Lyrics</button>
                                     <!-- Modal for lyrics-->
-                                    <div class="modal fade" id="verticalLyricsModal{{ $items->sid }}" tabindex="-1"
+                                    <div class="modal fade" id="verticalLyricsModal{{ $items->vid }}" tabindex="-1"
                                         role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="verticalModalTitle">Song Lyrics</h5>
+                                                    <h5 class="modal-title" id="verticalModalTitle">Video Description</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -201,7 +191,7 @@
                                                 </div>
                                                 <div class="modal-body"
                                                     style="height: 400px;overflow: hidden;overflow-y: scroll">
-                                                    <p>{{ $items->lyrics }}</p>
+                                                    <p>{{ $items->description }}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn mb-2 btn-secondary"
