@@ -44,7 +44,7 @@
             </li>
         </ul>
     @endif
-@endsection
+@endsection 
 @section('content-1')
     <style>
         .profile {

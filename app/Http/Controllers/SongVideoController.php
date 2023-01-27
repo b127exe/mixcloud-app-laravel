@@ -72,6 +72,52 @@ class SongVideoController extends Controller
       }
    }
 
+   public function artistUpdate($id){
+
+    $findArtist =  Artist::find($id);
+    $artist =  Artist::all();
+
+    return view('dashboard-pages.artist.updateArtist',compact('findArtist','artist'));
+       
+   }
+
+   public function artistUpdateStore(Request $request , $id){
+
+      $validator = Validator::make($request->all(), [
+         'name' => 'required|max:191',
+         'newImage' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+      ]);
+
+     $artist = Artist::find($id);
+     
+     $artist->artist_name = $request->input('name');
+
+     if($request->hasFile('newImage')){
+
+      $img = $request->file('newImage');
+      $imgName = $img->getClientOriginalName();
+      $imgName = Str::random(8) . $imgName;
+      $img->move('storage/artist-images/', $imgName);
+      unlink('storage/artist-images/'.$artist->artist_picture);
+
+     }
+     else{
+
+      $imgName = $request->input('oldImage');
+
+     }
+     $artist->artist_picture = $imgName;
+     $artist->save();
+
+     return response()->json([
+
+        'status' => 200,
+        'message' => "Update Successfully"
+
+     ]);
+
+   }
+
    public function artistSort(Request $request)
    {
       $search = $request['search'];
@@ -137,6 +183,58 @@ class SongVideoController extends Controller
 
          ]);
       }
+   }
+
+   public function albumUpdate($id){
+
+     $artist = Artist::all();
+     $findAlbum = Album::find($id);
+
+     return view('dashboard-pages.album.updateAlbum',compact("artist","findAlbum"));
+
+   }
+
+   public function albumUpdateStore(Request $request , $id){
+
+      $validator = Validator::make($request->all(), [
+         'coverName' => 'required|max:191',
+         'newCoverImage' => 'required|image|mimes:png,jpg,jpeg',
+         'artist' => 'required',
+      ]);
+
+      $album = Album::find($id);
+
+      if($album != null){
+
+        $album->album_name = $request->input('coverName');
+        $album->artist_id = $request->input('artist');
+
+        if($request->hasFile('newCoverImage')){
+
+         $img = $request->file('newCoverImage');
+         $imgName = $img->getClientOriginalName();
+         $imgName = Str::random(8) . $imgName;
+         $img->move('storage/album-covers/', $imgName);
+         unlink('storage/album-covers/'.$album->cover_picture);
+
+        } else {
+
+         $imgName = $request->input('oldCoverPicture');
+
+        }
+
+        $album->cover_picture = $imgName;
+        $album->save();
+
+        return response()->json([
+
+         'status' => 200,
+         'message' => "Update Successfully"
+ 
+      ]);
+
+      }
+
    }
 
    public function albumSort(Request $request)
@@ -217,6 +315,22 @@ class SongVideoController extends Controller
 
          ]);
       }
+   }
+
+   public function songUpdate($id){
+
+     $artist = Artist::all();
+     $findSong = Song::find($id);
+     $album = Album::all();
+
+     return view('dashboard-pages.song.updateSong',compact('artist','album','findSong'));
+
+   }
+
+   public function songUpdateStore(Request $request , $id){
+
+
+
    }
 
    public function songSort(Request $request)
@@ -308,5 +422,19 @@ class SongVideoController extends Controller
       $artist = Artist::all();
       $videos = DB::table('videos')->join('artists', 'videos.artist_id', '=', 'artists.artist_id')->join('albums', 'videos.album_id', '=', 'albums.album_id')->select('videos.*', 'artists.*', 'albums.*')->where('title','like',"%$search%")->get();
       return view('dashboard-pages.video.sortVideo',compact('artist','videos'));
+   }
+
+   public function videoDelete($id){
+
+    $video =  Video::find($id);
+
+    if($video !=  null){
+
+      unlink('storage/videos/'.$video->video_path);
+      $video->delete();
+      return redirect('/dashboard/sort-video');
+
+    }
+
    }
 }

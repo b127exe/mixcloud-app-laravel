@@ -89,7 +89,7 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" x-placement="top-end"
                                             style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(820px, 37px, 0px);">
-                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="{{url('/dashboard/update-album')}}/{{$items->album_id}}">Edit</a>
                                             <a class="dropdown-item" href="{{url('/dashboard/delete-album')}}/{{$items->album_id}}">Remove</a>
                                         </div>
                                     </div>

@@ -90,7 +90,7 @@
                                           <span class="text-muted sr-only">Action</span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dr1">
-                                          <a class="edit_btn dropdown-item" href="">Edit</a>
+                                          <a class="edit_btn dropdown-item" href="{{url('/dashboard/update-artist')}}/{{$item->artist_id}}">Edit</a>
                                           <a class="delete_btn dropdown-item" href="{{url('/dashboard/delete-artist')}}/{{$item->artist_id}}">Delete</a>
                                         </div>
                                       </div>

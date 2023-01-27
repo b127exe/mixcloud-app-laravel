@@ -1,4 +1,7 @@
 @extends('layouts.dashboard.dashboard')
+@section('link')
+    <link rel="stylesheet" href="/web-css/rockville.css" type="text/css">
+@endsection
 @section('sidebar')
     @if ($artist->isNotEmpty())
         <p class="text-muted nav-heading mt-4 mb-1">
@@ -37,7 +40,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="/dashboard/sort-video"><span class="ml-1 item-text">Sort Videos</span>
+                        <a class="nav-link pl-3" href="/dashboard/sort-video"><span class="ml-1 item-text">Sort
+                                Videos</span>
                         </a>
                     </li>
                 </ul>
@@ -63,7 +67,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, #8b2cff, #5C00CE);
-            border-radius: 10%;
+            border-radius: 50%;
             border: 3px solid #fff;
             text-align: center;
             cursor: pointer;
@@ -76,7 +80,7 @@
             display: none;
         }
 
-        .profile .fe-image {
+        .profile .fe-user {
             font-size: 12rem;
             color: rgb(212, 212, 212);
         }
@@ -87,8 +91,8 @@
 
         .profile .fe-camera {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
+            bottom: 0;
+            right: 15px;
             background: #fff;
             color: #333;
             line-height: normal;
@@ -98,66 +102,89 @@
             transition: .3s ease-in-out;
             box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
         }
+
+        .oldImgBox {
+            position: relative;
+        }
+
+        .oldImgBox img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
+        .oldImgBox h2 {
+            position: absolute;
+            text-align: center;
+            padding-top: 75px; 
+            font-size: 2rem;
+            color: #fff;
+            font-family: sans-serif ;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: 300ms linear;
+        }
+        .oldImgBox h2:hover{
+            opacity: 1;
+        }
     </style>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show d-none" role="alert">
-                    <strong class="text-dark">Your record add successfully</strong><button type="button" class="close"
+                    <strong class="text-dark">Your record updated successfully </strong><a href="/dashboard/sort-artist">Go back</a><button type="button" class="close"
                         data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <h2 class="page-title">Add Album</h2>
+                <h2 class="page-title">Update Artist</h2>
                 <p class="text-muted">Fill the below form</p>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card shadow mb-4">
                             <div class="card-header">
-                                <strong class="card-title">Album</strong>
+                                <strong class="card-title">Artist</strong>
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('/dashboard/album-store') }}" method="POST" class="needs-validation"
-                                    id="AddAlbumForm" enctype="multipart/form-data">
+                                <form action="{{ url('/dashboard/update-store') }}/{{$findArtist->artist_id}}" method="POST" class="needs-validation"
+                                    id="UpdateArtistForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="alert alert-warning d-none" role="alert" id="save_error"></div>
-                                    <div class="form-row justify-content-center">
+                                    <div class="form-row justify-content-around">
+                                        <div class="oldImgBox">
+                                            <img src="/storage/artist-images/{{ $findArtist->artist_picture }}">
+                                            <h2>Old Image</h2>
+                                        </div>
                                         <div class="profile">
                                             <label>
-                                                <span class="fe fe-image"></span>
+                                                <span class="fe fe-user"></span>
                                                 <span class="fe fe-camera"></span>
-                                                <input type="file" class="image-input" name="coverImage">
+                                                <input type="file" class="image-input" name="newImage">
                                             </label>
                                         </div>
                                     </div>
+                                    <input type="text" value="{{ $findArtist->artist_picture }}" hidden name="oldImage">
                                     <div class="form-row">
                                         <div class="col-md-12 mb-3">
-                                            <label>Album Name</label>
-                                            <input type="text" class="form-control" name="coverName"
-                                                placeholder="Enter album name">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control" name="name"
+                                                placeholder="Enter your name" value="{{ $findArtist->artist_name }}">
                                             <div class="valid-feedback"> Looks good! </div>
                                         </div>
                                     </div>
-                                     <div class="form-row">
-                                        <div class="form-group col-md-12">
-                                            <label for="simple-select2">Select Artist</label>
-                                            <select class="form-control select2" name="artist" id="simple-select2">
-                                              @foreach ($artist as $item)
-                                                  <option value="{{$item->artist_id}}">{{$item->artist_name}}</option>
-                                              @endforeach
-                                            </select>
-                                          </div>
-                                     </div>
-
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input type="checkbox" class="custom-control-input"
-                                                id="customControlValidation16">
-                                            <label class="custom-control-label" for="customControlValidation16"> Agree to
-                                                terms
-                                                and conditions</label>
-                                            <div class="invalid-feedback"> You must agreed before submitting. </div>
-                                        </div>
-                                       <button class="btn btn-primary" type="submit">Submit</button>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="customControlValidation16">
+                                        <label class="custom-control-label" for="customControlValidation16"> Agree to terms
+                                            and conditions</label>
+                                        <div class="invalid-feedback"> You must agreed before submitting. </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Submit</button>
                                 </form>
                             </div>
                         </div>
@@ -173,23 +200,22 @@
             let files = e.target.files[0];
             let url = URL.createObjectURL(files);
             image_label.style.background = `url(${url}) center / cover`;
-            image_label.querySelector('.fe-image').style.display = "none";
+            image_label.querySelector('.fe-user').style.display = "none";
         }
     </script>
 @endsection
 @section('script')
-<script src="/js/select2.min.js"></script>
 <script>
     $(document).ready(function () {
-       $(document).on("submit", "#AddAlbumForm", function (e) {
+       $(document).on("submit", "#UpdateArtistForm", function (e) {
            
            e.preventDefault();
 
-           let formData = new FormData($('#AddAlbumForm')[0]);
+           let formData = new FormData($('#UpdateArtistForm')[0]);
 
            $.ajax({
                method: "post",
-               url: "/dashboard/album-store",
+               url: "/dashboard/update-store/{{$findArtist->artist_id}}",
                data: formData,
                contentType: false,
                processData: false,
@@ -211,9 +237,9 @@
                     $('#save_error').html("");
                     $('#save_error').addClass("d-none");
                     // this.reset();
-                    $('#AddAlbumForm').find('input').val('');
+                    $('#UpdateArtistForm').find('input').val('');
                     image_label.style.background = `linear-gradient(45deg, #8b2cff, #5C00CE)`;
-                    image_label.querySelector('.fe-image').style.display = "block";
+                    image_label.querySelector('.fe-user').style.display = "block";
                     $(".alert-success").removeClass('d-none');
                  }
 

@@ -196,8 +196,6 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn mb-2 btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn mb-2 btn-primary">Save
-                                                        changes</button>
                                                 </div>
                                             </div>
                                         </div>
