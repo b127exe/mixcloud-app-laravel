@@ -50,7 +50,7 @@
         <div class="row justify-content-center">
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show d-none" role="alert">
-                    <strong class="text-dark">Song updated successfully</strong><button type="button" class="close"
+                    <strong class="text-dark">Song updated successfully </strong><a href="/dashboard/sort-song">Go Back</a><button type="button" class="close"
                         data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -64,7 +64,7 @@
                                 <strong class="card-title">Song Form</strong>
                             </div>
                             <div class="card-body">
-                                <form action="{{url('/dashboard/song-store')}}" method="POST" class="needs-validation" id="AddSongForm" enctype="multipart/form-data">
+                                <form action="{{url('/dashboard/update-store-song')}}/{{$findSong->sid}}" method="POST" class="needs-validation" id="UpdateSongForm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="alert alert-warning d-none" role="alert" id="save_error"></div>
                                     <div class="form-group mb-3">
@@ -82,7 +82,7 @@
                                       <div class="form-group mb-3">
                                         <label for="simple-select4">Genre</label>
                                         <select class="form-control select2" name="genre" id="simple-select4">
-                                           <option value=""></option>
+                                           <option selected>{{$findSong->genre}}</option>
                                            <option value="Rhythm and blues">Rhythm and blues</option>
                                            <option value="Classical music">Classical music</option>
                                            <option value="Soul music">Soul music</option>
@@ -107,13 +107,15 @@
                                       </div>
                                     <div class="form-group mb-3">
                                         <label>Song Duration</label>
-                                        <input type="number" class="form-control" name="duration">
+                                        <input type="number" class="form-control" value="{{$findSong->mtime}}" name="duration">
                                       </div>
                                     <div class="form-group mb-3">
                                         <label for="simple-select2">Song Artist</label>
                                         <select class="form-control select2" name="artist" id="simple-select2">
                                             @foreach ($artist as $item)
-                                                <option value="{{$item->artist_id}}">{{$item->artist_name}}</option>
+                                                <option value="{{$item->artist_id}}" @if ($item->artist_id == $findSong->artist_id)
+                                                    selected
+                                                @endif>{{$item->artist_name}}</option>
                                             @endforeach
                                           </select>
                                       </div>
@@ -121,12 +123,19 @@
                                         <label for="simple-select3">Album</label>
                                         <select class="form-control select2" name="album" id="simple-select3">
                                             @foreach ($album as $item)
-                                                <option value="{{$item->album_id}}">{{$item->album_name}}</option>
+                                                <option value="{{$item->album_id}}" @if ($item->album_id == $findSong->album_id)
+                                                     selected
+                                                @endif>{{$item->album_name}}</option>
                                             @endforeach
                                           </select>
                                       </div>
                                       <div class="form-group mb-4">
-                                          <label for="customFile">Song</label>
+                                          <label>Old Song</label>
+                                        <audio src="/storage/songs/{{$findSong->song_path}}" controls style="width: 100%;display:block;"></audio>
+                                      </div>
+                                      <input type="text" value="{{$findSong->song_path}}" hidden name="oldSong">
+                                      <div class="form-group mb-4">
+                                          <label for="customFile">New Updated Song</label>
                                           <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="customFile" name="Newsong">
                                             <label class="custom-file-label" for="customFile">Choose file</label>
@@ -155,15 +164,15 @@
 
 <script>
     $(document).ready(function () {
-       $(document).on("submit", "#AddSongForm", function (e) {
+       $(document).on("submit", "#UpdateSongForm", function (e) {
            
            e.preventDefault();
 
-           let formData = new FormData($('#AddSongForm')[0]);
+           let formData = new FormData($('#UpdateSongForm')[0]);
 
            $.ajax({
                method: "post",
-               url: "/dashboard/song-store",
+               url: "/dashboard/update-store-song/{{$findSong->sid}}",
                data: formData,
                contentType: false,
                processData: false,
@@ -185,7 +194,7 @@
                     $('#save_error').html("");
                     $('#save_error').addClass("d-none");
                     // this.reset();
-                    $('#AddSongForm').find('input').val('');
+                    $('#UpdateSongForm').find('input').val('');
                     let textarea = document.getElementById('example-textarea');
                     textarea.value = "";
                     $(".alert-success").removeClass('d-none');

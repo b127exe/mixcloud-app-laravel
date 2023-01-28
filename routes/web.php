@@ -37,12 +37,14 @@ Route::group(["prefix" => "dashboard"],function(){
   Route::get('/sort-song',[SongVideoController::class, 'songSort']);
   Route::get('/delete-song/{id}',[SongVideoController::class, 'songDelete']);
   Route::get('/update-song/{id}',[SongVideoController::class, 'songUpdate']);
-  Route::get('/update-store-song/{id}',[SongVideoController::class, 'songUpdateStore']);
+  Route::post('/update-store-song/{id}',[SongVideoController::class, 'songUpdateStore']);
   //Video Routes
   Route::get('/add-video',[SongVideoController::class , 'addVideo']);
   Route::post('/video-store',[SongVideoController::class , 'videoStore']);
   Route::get('/sort-video',[SongVideoController::class , 'videoSort']);
-  Route::get('delete-video/{id}',[SongVideoController::class , 'videoDelete']);
+  Route::get('/delete-video/{id}',[SongVideoController::class , 'videoDelete']);
+  Route::get('/update-video/{id}',[SongVideoController::class , 'videoUpdate']);
+  Route::post('/update-store-video/{id}',[SongVideoController::class , 'videoUpdateStore']);
 });
 
 Route::group(["prefix" => "mixcloud"],function(){

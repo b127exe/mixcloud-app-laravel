@@ -74,9 +74,9 @@ p {
 	margin: 0 0 15px 0;
 }
 
-img {
+/* img {
 	max-width: 100%;
-}
+} */
 
 input:focus,
 select:focus,
@@ -1105,7 +1105,6 @@ ol {
 .footer__social .footer__social__links a:last-child {
 	margin-right: 0;
 }
-
 .footer__newslatter {
 	margin-bottom: 50px;
 }

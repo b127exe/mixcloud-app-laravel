@@ -98,7 +98,7 @@ class SongVideoController extends Controller
       $imgName = $img->getClientOriginalName();
       $imgName = Str::random(8) . $imgName;
       $img->move('storage/artist-images/', $imgName);
-      unlink('storage/artist-images/'.$artist->artist_picture);
+      unlink('storage/artist-images/'.$request->input('oldImage'));
 
      }
      else{
@@ -215,7 +215,7 @@ class SongVideoController extends Controller
          $imgName = $img->getClientOriginalName();
          $imgName = Str::random(8) . $imgName;
          $img->move('storage/album-covers/', $imgName);
-         unlink('storage/album-covers/'.$album->cover_picture);
+         unlink('storage/album-covers/'.$request->input('oldCoverPicture'));
 
         } else {
 
@@ -329,7 +329,49 @@ class SongVideoController extends Controller
 
    public function songUpdateStore(Request $request , $id){
 
+      $validator = Validator::make($request->all(), [
+         'title' => 'required|max:50',
+         'lyrics' => 'required',
+         'track' => 'required',
+         'genre' => 'required',
+         'duration' => 'required',
+         'artist' => 'required',
+         'album' => 'required',
+         'Newsong' => 'required',
+      ]);
 
+      $uSong = Song::find($id);
+      
+      if($uSong != null){
+
+         $uSong->title = $request->input('title');
+         $uSong->lyrics = $request->input('lyrics');
+         $uSong->track = $request->input('track');
+         $uSong->mtime = $request->input('duration');
+         $uSong->genre = $request->input('genre');
+         $uSong->album_id = $request->input('album');
+         $uSong->artist_id = $request->input('artist');
+
+         if($request->hasFile('Newsong')){
+            $songs = $request->file('Newsong');
+            $songName = $songs->getClientOriginalName();
+            $songName = Str::random(8) . $songName;
+            $songs->move('storage/songs/', $songName);
+            unlink('storage/songs/'.$request->input('oldSong'));
+         }
+         else{
+            $songName = $request->input('oldSong');
+         }
+
+         $uSong->save();
+         return response()->json([
+
+            'status' => 200,
+            'message' => "Updated Successfully"
+
+         ]);
+
+      }
 
    }
 
@@ -415,6 +457,51 @@ class SongVideoController extends Controller
       }
 
    }
+
+   public function videoUpdate($id){
+
+    $artist = Artist::all();
+    $album = Album::all();
+    $findVideo = Video::find($id);
+
+    return view('dashboard-pages.video.updateVideo',compact('artist','album','findVideo'));
+
+   }
+
+   public function videoUpdateStore(Request $request , $id){
+
+      $validator = Validator::make($request->all(), [
+         'title' => 'required|max:50',
+         'description' => 'required',
+         'duration' => 'required',
+         'artist' => 'required',
+         'album' => 'required',
+         'video' => 'required',
+      ]);
+      
+      $fVideo = Video::find($id);
+
+      if($fVideo != null){
+
+        $fVideo->title = $request->input('title');
+        $fVideo->description = $request->input('description');
+        $fVideo->duration = $request->input('duration');
+        $fVideo->artist_id = $request->input('artist');
+        $fVideo->album_id = $request->input('album');
+        $fVideo->video_path = $request->input('video');
+        $fVideo->save();
+        
+        return response()->json([
+
+         'status' => 200,
+         'message' => "Add Successfully"
+
+      ]);
+
+      }
+
+   }
+
    public function videoSort(Request $request){
  
        $search = $request['search'];

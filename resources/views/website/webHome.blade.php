@@ -3,32 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="DJoz Template">
-    <meta name="keywords" content="DJoz, unica, creative, html">
+    <meta name="description" content="Mixcloud">
+    <meta name="keywords" content="Mixcloud, unica, creative">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DJoz | Template</title>
+    <title>Mixcloud | Home</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{{url('/web-css/bootstrap.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/font-awesome.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/barfiller.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/nowfont.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/rockville.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/magnific-popup.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/owl.carousel.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/slicknav.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{url('/web-css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{url('/web-css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/barfiller.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/nowfont.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/rockville.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/slicknav.min.css')}}">
+    <link rel="stylesheet" href="{{url('/web-css/style.css')}}">
 </head>
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    {{-- <div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div> --}}
 
     <!-- Header Section Begin -->
     <header class="header">
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="web-img/logo.png" alt=""></a>
+                        <a href=""><img src="{{url('/assets/logo/logo-2.png')}}" width="60%"></a>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-10">
@@ -48,22 +48,23 @@
                                 <li><a href="./discography.html">Discography</a></li>
                                 <li><a href="./tours.html">Tours</a></li>
                                 <li><a href="./videos.html">Videos</a></li>
-                                <li><a href="#">Pages</a>
+                                <li><a href="./contact.html">Contact</a></li>
+                                <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="./about.html">About</a></li>
                                         <li><a href="./blog.html">Blog</a></li>
                                         <li><a href="./blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./contact.html">Contact</a></li>
                             </ul>
                         </nav>
-                        <div class="header__right__social">
+                        {{-- <div class="header__right__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
                             <a href="#"><i class="fa fa-dribbble"></i></a>
-                        </div>
+                        </div> --}}
+                        
                     </div>
                 </div>
             </div>
@@ -97,7 +98,33 @@
 
 
     <!-- Event Section Begin  Also Latest Artist-->    
-      
+     <section class="event spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Popular Artists</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="event__slider owl-carousel">
+                    @foreach ($artist as $item)
+                    <div class="col-lg-4">
+                        <div class="event__item">
+                            <div class="event__item__pic set-bg" data-setbg="{{url('/storage/artist-images')}}/{{$item->artist_picture}}">
+                            </div>
+                            <div class="event__item__text">
+                                <h4>{{$item->artist_name}}</h4>
+                                <p><i class="fa fa-music"></i>Mixcloud Artist</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Event Section End -->
 
 
@@ -137,47 +164,20 @@
             <div class="row">
                 <div class="col-lg-7 p-0">
                     <div class="track__content nice-scroll">
+                        @foreach ($songs as $item)
                         <div class="single_player_container">
-                            <h4>David Guetta Miami Ultra</h4>
-                            <div class="jp-jplayer jplayer" data-ancestor=".jp_container_1"
-                                data-url="{{url('/web-music-files/1.mp3')}}"></div>
-                            <div class="jp-audio jp_container_1" role="application" aria-label="media player">
-                                <div class="jp-gui jp-interface">
-                                    <!-- Player Controls -->
-                                    <div class="player_controls_box">
-                                        <button class="jp-play player_button" tabindex="0"></button>
-                                    </div>
-                                    <!-- Progress Bar -->
-                                    <div class="player_bars">
-                                        <div class="jp-progress">
-                                            <div class="jp-seek-bar">
-                                                <div>
-                                                    <div class="jp-play-bar">
-                                                        <div class="jp-current-time" role="timer" aria-label="time">0:00
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="jp-duration ml-auto" role="timer" aria-label="duration">00:00</div>
-                                    </div>
-                                    <!-- Volume Controls -->
-                                    <div class="jp-volume-controls">
-                                        <button class="jp-mute" tabindex="0"><i
-                                                class="fa fa-volume-down"></i></button>
-                                        <div class="jp-volume-bar">
-                                            <div class="jp-volume-bar-value" style="width: 0%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="d-flex justify-content-between">
+                                <h4>{{$item->title}}</h4>
+                                <span class="mr-5">Track #{{$item->track}}</span>
                             </div>
+                            <audio src="storage/songs/{{$item->song_path}}" controls style="width: 90%"></audio>
                         </div>
-                       
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-5 p-0">
                     <div class="track__pic">
-                        <img src="{{url('/web-img/track-right.jpg')}}" alt="">
+                        <img src="{{url('/web-img/track-right.jpg')}}">
                     </div>
                 </div>
             </div>
@@ -191,42 +191,43 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Youtube feed</h2>
+                        <h2>Videos feed</h2>
                         <h1>Latest videos</h1>
                     </div>
                 </div>
             </div>
             <div class="row">
+                @foreach ($videos as $items)
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="youtube__item">
                         <div class="youtube__item__pic set-bg" data-setbg="img/youtube/youtube-1.jpg">
-                            <a href="https://www.youtube.com/watch?v=yJg-Y5byMMw?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                            <a href=""  data-toggle="modal" data-target="#verticalModal{{$items->vid}}" class="play-btn"><i class="fa fa-play"></i></a>
+                          
                         </div>
                         <div class="youtube__item__text">
-                            <h4>David Guetta Miami Ultra Music Festival 2019</h4>
+                            <h4>{{$items->title}}</h4>
                         </div>
                     </div>
+                    <div class="modal fade" id="verticalModal{{$items->vid}}" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="verticalModalTitle">Modal title</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                  <video src="storage/videos/{{$items->video_path}}" width="100%" controls></video>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="youtube__item">
-                        <div class="youtube__item__pic set-bg" data-setbg="img/youtube/youtube-2.jpg">
-                            <a href="https://www.youtube.com/watch?v=K4DyBUG242c?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                        </div>
-                        <div class="youtube__item__text">
-                            <h4>Martin Garrix (Full live-set) | SLAM!Koningsdag</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="youtube__item">
-                        <div class="youtube__item__pic set-bg" data-setbg="img/youtube/youtube-3.jpg">
-                            <a href="https://www.youtube.com/watch?v=S19UcWdOA-I?autoplay=1" class="play-btn video-popup"><i class="fa fa-play"></i></a>
-                        </div>
-                        <div class="youtube__item__text">
-                            <h4>Dimitri Vegas, Steve Aoki & Like Mike’s “3 Are Legend”</h4>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -269,7 +270,7 @@
     <!-- Countdown Section End -->
 
     <!-- Footer Section Begin -->
-    <footer class="footer spad set-bg" data-setbg="img/footer-bg.png">
+    <footer class="footer spad set-bg" data-setbg="/web-img/footer-bg.png">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -328,7 +329,7 @@
     <script src="{{url('/web-js/jquery.slicknav.js')}}"></script>
     <script src="{{url('/web-js/owl.carousel.min.js')}}"></script>
     <script src="{{url('/web-js/main.js')}}"></script>
-
+    
     <!-- Music Plugin -->
     <script src="{{url('/web-js/jquery.jplayer.min.js')}}"></script>
     <script src="{{url('/web-js/jplayerInit.js')}}"></script>
