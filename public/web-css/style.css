@@ -1118,6 +1118,7 @@ ol {
 
 .footer__newslatter form {
 	position: relative;
+	display: flex;
 }
 
 .footer__newslatter form input {
@@ -1129,7 +1130,18 @@ ol {
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	padding-left: 20px;
 }
-
+.footer__newslatter form select	 {
+	height: 50px;
+	font-size: 15px;
+	color: #ffffff;
+	width: 30%;
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding-left: 20px;
+}
+.footer__newslatter form select option{
+	color: #000;
+}
 .footer__newslatter form input::-webkit-input-placeholder {
 	color: #ffffff;
 }
