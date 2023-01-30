@@ -621,7 +621,7 @@ ol {
 	top: 12px;
 	width: 16px;
 	height: 20px;
-	background: url(../web-img/play-default.png);
+	background: url(/web-img/play-default.png);
 	content: "";
 }
 
@@ -631,7 +631,7 @@ ol {
 }
 
 .jp-state-playing .jp-play:after {
-	background: url(../web-img/pause.png) !important;
+	background: url(/web-img/pause.png) !important;
 	left: 15px;
 	top: 12px;
 }
@@ -642,7 +642,7 @@ ol {
 }
 
 .jp-audio .jp-play:focus:after {
-	background: url(../web-img/play.png);
+	background: url(/web-img/play.png);
 }
 
 .jp-seek-bar>div {

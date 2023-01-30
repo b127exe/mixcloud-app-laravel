@@ -96,20 +96,20 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li><a href="/mixcloud">Home</a></li>
-                                <li><a href="./about.html">About</a></li>
-                                <li><a href="./discography.html">Discography</a></li>
                                 <li><a href="/mixcloud/all-songs">Songs</a></li>
                                 <li><a href="/mixcloud/all-videos">Videos</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
                                 <li><a href="#">Playlist</a>
                                     <ul class="dropdown">
-                                        <li><a href="" data-toggle="modal" data-target="#AddPlaylist">Add Playlist</a></li>
+                                        <li><a href="" data-toggle="modal" data-target="#AddPlaylist">Add
+                                                Playlist</a></li>
                                         <li><a href="/mixcloud/all-playlist">All Playlist</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="/mixcloud/about">About</a></li>
+                                <li><a href="/mixcloud/contact">Contact</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
-                                        <li><a href="./about.html">Setting</a></li>
+                                        <li><a href="/mixcloud/setting">Setting</a></li>
                                         <li><a href="/logout">Logout</a></li>
                                     </ul>
                                 </li>
@@ -199,7 +199,7 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>mixcloud@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
@@ -225,11 +225,13 @@
                     </div>
                 </div>
             </div>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			<div class="footer__copyright__text">
-				<p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-			</div>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <div class="footer__copyright__text">
+                <p>Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script> All rights reserved | This Website is made by Bilal</a>
+                </p>
+            </div>
         </div>
     </footer>
     <!-- Footer Section End -->

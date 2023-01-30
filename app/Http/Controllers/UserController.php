@@ -34,7 +34,7 @@ class UserController extends Controller
 
         // echo $user[0]->password;
 
-        session()->put(['email' => $user[0]->email, 'photo' => $user[0]->profile_photo, 'id' => $user[0]->uid, 'role' => $user[0]->role]);
+        session()->put(['name'=> $user[0]->name ,'email' => $user[0]->email, 'photo' => $user[0]->profile_photo, 'id' => $user[0]->uid, 'role' => $user[0]->role]);
 
         if (session()->get('role') == 1) {
             return redirect('/dashboard');

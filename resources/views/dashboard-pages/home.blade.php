@@ -45,3 +45,50 @@
 </ul>
 @endif
 @endsection
+@section('content-1')
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 mx-auto">
+                <div class="row">
+                    <div class="col-md-3 my-4">
+                      <div class="card shadow">
+                        <div class="card-body text-center">
+                          <p class="small mb-3"><strong>Songs</strong></p>
+                          {{-- <div id="gauge1" class="gauge-container mx-auto">
+                          </div> --}}
+                        </div> 
+                      </div> 
+                    </div> 
+                    <div class="col-md-3 my-4">
+                      <div class="card shadow">
+                        <div class="card-body text-center">
+                          <p class="small mb-3"><strong>Videos</strong></p>
+                          {{-- <div id="gauge2" class="gauge-container mx-auto">
+                          </div> --}}
+                        </div> 
+                      </div> 
+                    </div> 
+                    <div class="col-md-3 my-4">
+                      <div class="card shadow">
+                        <div class="card-body text-center">
+                          <p class="small mb-3"><strong>Albums</strong></p>
+                          {{-- <div id="gauge3" class="gauge-container g3 mx-auto">
+                          </div> --}}
+                        </div> 
+                      </div>
+                    </div> 
+                    <div class="col-md-3 my-4">
+                      <div class="card shadow">
+                        <div class="card-body text-center">
+                          <p class="small mb-3"><strong>Users</strong></p>
+                          {{-- <div id="gauge4" class="gauge-container g4 mx-auto">
+                            <span class="value-text text-muted small">MB/s</span>
+                          </div> --}}
+                        </div> 
+                      </div> 
+                    </div> 
+                  </div>
+            </div>
+        </div>
+    </div>
+@endsection

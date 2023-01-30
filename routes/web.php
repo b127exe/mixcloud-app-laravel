@@ -64,6 +64,17 @@ Route::group(["prefix" => "mixcloud"],function(){
    Route::post('/video-to-playlist-store',[WebController::class , "VideoToPlaylistStore"]);
    //add playlist
    Route::post('/add-playlist-store',[WebController::class , "addPlaylistStore"]);
+   Route::get('/playlist-detail/{id}',[WebController::class , "playlistDetail"]);
+   //add review on songs
+   Route::get('/song-review/{id}',[WebController::class , "songReview"]);
+   Route::post('/song-review-store',[WebController::class , "songReviewStore"]);
+   //add review on videos
+   Route::get('/video-review/{id}',[WebController::class , "videoReview"]);
+   Route::post('/video-review-store',[WebController::class , "videoReviewStore"]);
+   //other information routes
+   Route::get('/about',[WebController::class , 'about']);
+   Route::get('/contact',[WebController::class , 'contact']);
+   Route::get('/setting',[WebController::class , 'setting']);
 });
 
 Route::get('/login',[UserController::class , 'Login']);

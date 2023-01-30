@@ -95,21 +95,21 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li ><a href="/mixcloud">Home</a></li>
-                                <li><a href="./about.html">About</a></li>
-                                <li><a href="./discography.html">Discography</a></li>
+                                <li><a href="/mixcloud">Home</a></li>
                                 <li class="active"><a href="/mixcloud/all-songs">Songs</a></li>
                                 <li><a href="/mixcloud/all-videos">Videos</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
                                 <li><a href="#">Playlist</a>
                                     <ul class="dropdown">
-                                        <li><a href="" data-toggle="modal" data-target="#AddPlaylist">Add Playlist</a></li>
+                                        <li><a href="" data-toggle="modal" data-target="#AddPlaylist">Add
+                                                Playlist</a></li>
                                         <li><a href="/mixcloud/all-playlist">All Playlist</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="/mixcloud/about">About</a></li>
+                                <li><a href="/mixcloud/contact">Contact</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
-                                        <li><a href="./about.html">Setting</a></li>
+                                        <li><a href="/mixcloud/setting">Setting</a></li>
                                         <li><a href="/logout">Logout</a></li>
                                     </ul>
                                 </li>
@@ -136,6 +136,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="hero__text">
+                        <span>All Songs</span>
                         <h1>Feel the heart beats</h1>
                         <div class="footer__newslatter">
                             <form action="" method="GET">
@@ -149,7 +150,6 @@
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=K4DyBUG242c" class="play-btn video-popup"><i class="fa fa-play"></i></a>
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="track__all">
-                        <a href="#" class="primary-btn border-btn">Go Back</a>
+                        <a href="/mixcloud" class="primary-btn border-btn">Go Back</a>
                     </div>
                 </div>
             </div>
@@ -190,7 +190,12 @@
                                 <p class="mr-5">Artist | {{$item->artist_name}}</p>
                             </div>             
                             <audio src="{{url('/storage/songs')}}/{{$item->song_path}}" controls style="width: 90%"></audio>
-                            <a href="/mixcloud/song-to-playlist/{{$item->sid}}"><button type="button" style="background: #f1f2f4; border-radius: 30px;" class="btn-custom"><i class="fa fa-plus"></i> Add to playlist</button></a>
+                            <div class="d-flex justify-content-between">
+                                <a href="/mixcloud/song-to-playlist/{{$item->sid}}"><button type="button" style="background: #f1f2f4; border-radius: 30px;" class="btn-custom"><i class="fa fa-plus"></i> Add to playlist</button></a>
+                                <a href="/mixcloud/song-review/{{ $item->sid }}" style="background: #f1f2f4; border-radius: 30px;"
+                                    class="btn-custom mr-5"><i class="fa fa-star"></i>
+                                    Review</a>
+                            </div>
                         </div>
                         @endforeach
                     </div>
@@ -233,7 +238,7 @@
                             <li>
                                 <i class="fa fa-envelope"></i>
                                 <p>Email</p>
-                                <h6>DJ.Music@gmail.com</h6>
+                                <h6>mixcloud@gmail.com</h6>
                             </li>
                         </ul>
                     </div>
@@ -259,11 +264,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			<div class="footer__copyright__text">
-				<p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-			</div>
-			<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          
+            <div class="footer__copyright__text">
+                <p>Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script> All rights reserved | This Website is made by Bilal</a>
+                </p>
+            </div>
+       
         </div>
     </footer>
     <!-- Footer Section End -->

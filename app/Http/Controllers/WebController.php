@@ -6,6 +6,9 @@ use App\Models\Artist;
 use App\Models\Playlist;
 use App\Models\Playlist_song;
 use App\Models\Playlist_video;
+use App\Models\Song_interact;
+use App\Models\User;
+use App\Models\Video_interact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -81,6 +84,8 @@ class WebController extends Controller
     return view('website.allVideos')->with('videos', $videos);
   }
 
+  //Playlist Work Start here
+
   public function addPlaylistStore(Request $request)
   {
 
@@ -118,6 +123,14 @@ class WebController extends Controller
     $playlist = Playlist::all();
 
     return view('website.playlist')->with('playlist', $playlist);
+  }
+
+  public function playlistDetail($id){
+
+    $playlist = Playlist::find($id);
+
+    return view('website.singlePlaylist',compact('playlist'));
+
   }
 
   //Add song to Playlist
@@ -204,4 +217,117 @@ class WebController extends Controller
     }
 
   }
+
+  //Review Work on songs
+
+  public function songReview($id){
+ 
+   return view('website.songReview')->with('id',$id);
+
+  }
+
+  public function songReviewStore(Request $request){
+
+    $validator = Validator::make($request->all(), [
+      'review' => 'required',
+      'like' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+
+      return response()->json([
+
+        'status' => 400,
+        'errors' => $validator->messages()
+
+      ]);
+    }
+    else{
+
+     $song_interact = new Song_interact;
+     $song_interact->song_like = $request->input('like');
+     $song_interact->review = $request->input('review');
+     $song_interact->song_id = $request->input('song');
+     $song_interact->user_id = session()->get('id');
+     $song_interact->save();
+     return response()->json([
+
+      'status' => 200,
+      'message' => "Add Successfully"
+
+    ]);
+
+    }
+
+  }
+
+  //Review Work on videos
+
+  public function videoReview($id){
+
+   return view('website.videoReview')->with('id',$id);
+
+  }
+  
+  public function videoReviewStore(Request $request){
+
+    $validator = Validator::make($request->all(), [
+      'review' => 'required',
+      'like' => 'required'
+    ]);
+
+    if ($validator->fails()) {
+
+      return response()->json([
+
+        'status' => 400,
+        'errors' => $validator->messages()
+
+      ]);
+    }
+    else{
+
+      $video_interact = new Video_interact;
+      $video_interact->video_like = $request->input('like');
+      $video_interact->review = $request->input('review');
+      $video_interact->user_id = session()->get('id');
+      $video_interact->video_id = $request->input('video');
+      $video_interact->save();
+
+      return response()->json([
+
+        'status' => 200,
+        'message' => "Add Successfully"
+  
+      ]);
+
+    }
+
+  }
+
+  //Other Information Pages
+
+  public function about(){
+
+  $songs = DB::table('songs')->count();
+  $videos = DB::table('videos')->count();
+  $albums = DB::table('albums')->count();
+
+   return view('website.about',compact('songs','videos','albums'));
+
+  }
+
+  public function contact(){
+
+   return view('website.contact');
+
+  }
+
+  public function setting(){
+
+   return view('website.userSetting');
+
+  }
+
+
 }
