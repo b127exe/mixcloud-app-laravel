@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id('pv_id');
             $table->unsignedBigInteger('video_id');
             $table->foreign('video_id')->references('vid')->on('videos');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('uid')->on('users');
+            $table->unsignedBigInteger('playlist_id');
+            $table->foreign('playlist_id')->references('pid')->on('playlists');
             $table->timestamps();
         });
     }

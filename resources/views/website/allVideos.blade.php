@@ -67,11 +67,11 @@
                     <hr>
                     <div class="form-group">
                         <label>Playlist Name</label>
-                        <input class="form-control" type="text" placeholder="Use # Instead">
+                        <input class="form-control" type="text" placeholder="Use # Instead" name="name">
                     </div>
                     <div class="form-group">
                         <label>Bio</label>
-                        <Textarea class="form-control" rows="2" id="text-area"></Textarea>
+                        <Textarea class="form-control" rows="2" id="text-area" name="bio"></Textarea>
                     </div>
                     <button type="submit" class="btn-custom">Submit</button>
                 </form>
@@ -104,14 +104,13 @@
                                 <li><a href="#">Playlist</a>
                                     <ul class="dropdown">
                                         <li><a href="" data-toggle="modal" data-target="#AddPlaylist">Add Playlist</a></li>
-                                        <li><a href="">All Playlist</a></li>
+                                        <li><a href="/mixcloud/all-playlist">All Playlist</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
-                                        <li><a href="./about.html">About</a></li>
-                                        <li><a href="./blog.html">Blog</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
+                                        <li><a href="./about.html">Setting</a></li>
+                                        <li><a href="/logout">Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -183,6 +182,7 @@
                         <div class="youtube__item__text">
                             <h4>{{$items->title}}</h4>
                         </div>
+                        <a href="/mixcloud/video-to-playlist/{{$items->vid}}"><button type="button" style="background: #f1f2f4; border-radius: 30px;" class="btn-custom mb-3 ml-3"><i class="fa fa-plus"></i> Add to playlist</button></a>
                     </div>
                     <div class="modal fade" id="verticalModal{{$items->vid}}" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">

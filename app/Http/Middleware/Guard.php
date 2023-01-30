@@ -17,11 +17,27 @@ class Guard
     public function handle(Request $request, Closure $next)
     {
 
-        if ($request->session()->has('email')) {
+        // return $next($request);
+
+        if($request->session()->has('email')){
+
+          if($request->session()->has('role') == 1){
+
             return $next($request);
+            
+          }
+          else{
+
+            return redirect('/mixcloud');
+
+          }
+
         }
         else{
-            return redirect('/login');
+
+           return redirect('/login');
+
         }
+               
     }
 }

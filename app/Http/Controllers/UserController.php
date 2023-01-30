@@ -30,21 +30,16 @@ class UserController extends Controller
             'password' => 'required'
         ]);
 
-        $user = DB::table('users')->select('users.*')->where('email','=',$request['email'])->where('password','=',md5($request['password']))->get();
+        $user = DB::table('users')->select('users.*')->where('email', '=', $request['email'])->where('password', '=', md5($request['password']))->get();
 
         // echo $user[0]->password;
 
-        if($user){
+        session()->put(['email' => $user[0]->email, 'photo' => $user[0]->profile_photo, 'id' => $user[0]->uid, 'role' => $user[0]->role]);
 
-          session()->put(['email'=> $user[0]->email , 'photo' => $user[0]->profile_photo , 'id' => $user[0]->uid , 'role' => $user[0]->role]);
-
-          if(session()->get('role') == 1){
+        if (session()->get('role') == 1) {
             return redirect('/dashboard');
-          }
-          else{
+        } else {
             return redirect('/mixcloud');
-          }
-
         }
     }
 
@@ -76,7 +71,15 @@ class UserController extends Controller
     public function Logout()
     {
 
-        session()->flush();
-        return redirect('/login');
+        if (session()->has('email')) {
+
+            session()->flush();
+            return redirect('/login');
+            
+        } else {
+ 
+            return false;
+
+        }
     }
 }

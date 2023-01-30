@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(["prefix" => "dashboard"],function(){
-  Route::get('/',[SongVideoController::class , 'index'])->middleware('emailcheck');
+  Route::get('/',[SongVideoController::class , 'index']);
   //Artist Routes
   Route::get('/add-artist',[SongVideoController::class , 'addArtist']);
   Route::post('/artist-store',[SongVideoController::class , 'artistStore']);
@@ -55,14 +55,28 @@ Route::group(["prefix" => "mixcloud"],function(){
    Route::get('/search-content',[WebController::class , "searchContent"]);
    Route::get('/all-songs',[WebController::class , "allSongs"]);
    Route::get('/all-videos',[WebController::class , "allVideos"]);
+   Route::get('/all-playlist',[WebController::class , "playlist"]);
+   //add songs to playlist
+   Route::get('/song-to-playlist/{id}',[WebController::class , "SongToPlaylist"]);
+   Route::post('/song-to-playlist-store',[WebController::class , "SongToPlaylistStore"]);
+   //add videos to playlist
+   Route::get('/video-to-playlist/{id}',[WebController::class , "VideoToPlaylist"]);
+   Route::post('/video-to-playlist-store',[WebController::class , "VideoToPlaylistStore"]);
+   //add playlist
    Route::post('/add-playlist-store',[WebController::class , "addPlaylistStore"]);
-})->middleware('emailcheck');
+});
 
 Route::get('/login',[UserController::class , 'Login']);
 Route::post('/login-store',[UserController::class , 'LoginStore']);
 Route::get('/register',[UserController::class , 'Register']);
 Route::post('/register-store',[UserController::class , 'RegisterStore']);
 Route::get('/logout',[UserController::class , 'Logout']);
+
+Route::get('/',function(){
+
+  return redirect('/login');
+
+});
 
 Route::get('/destroy',function(){
     

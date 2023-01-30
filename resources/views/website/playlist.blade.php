@@ -95,7 +95,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/mixcloud">Home</a></li>
+                                <li><a href="/mixcloud">Home</a></li>
                                 <li><a href="./about.html">About</a></li>
                                 <li><a href="./discography.html">Discography</a></li>
                                 <li><a href="/mixcloud/all-songs">Songs</a></li>
@@ -137,19 +137,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="hero__text">
-                        <span>New single</span>
+                        <span>Playlists</span>
                         <h1>Feel the heart beats</h1>
-                        <div class="footer__newslatter">
-                            <form action="{{ url('/mixcloud/search-content') }}" method="GET">
-                                <select name="table">
-                                    <option selected>---Select---</option>
-                                    <option value="songs">Songs</option>
-                                    <option value="videos">Videos</option>
-                                </select>
-                                <input type="text" placeholder="Searching..." name="search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
                         <a href="https://www.youtube.com/watch?v=K4DyBUG242c" class="play-btn video-popup"><i
                                 class="fa fa-play"></i></a>
                     </div>
@@ -161,9 +150,6 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
-
-
 
     <!-- Event Section Begin  Also Latest Artist-->
     <section class="event spad">
@@ -177,15 +163,15 @@
             </div>
             <div class="row">
                 <div class="event__slider owl-carousel">
-                    @foreach ($artist as $item)
+                    @foreach ($playlist as $item)
                         <div class="col-lg-4">
                             <div class="event__item">
-                                <div class="event__item__pic set-bg"
-                                    data-setbg="{{ url('/storage/artist-images') }}/{{ $item->artist_picture }}">
+
+                                <div class="event__item__pic set-bg" data-setbg="{{url('/assets/products/p4.jpg')}}">
                                 </div>
                                 <div class="event__item__text">
-                                    <h4>{{ $item->artist_name }}</h4>
-                                    <p><i class="fa fa-music"></i>Mixcloud Artist</p>
+                                    <a href=""><h4>{{ $item->playlist_name }}</h4></a>
+                                    {{-- <p><i class="fa fa-music"></i>Mixcloud Artist</p> --}}
                                 </div>
                             </div>
                         </div>
@@ -195,121 +181,6 @@
         </div>
     </section>
     <!-- Event Section End -->
-
-
-
-
-    <!-- About Section Begin Also Banner Section-->
-
-    <!-- About Section End -->
-
-
-
-
-    <!-- Services Section Begin -->
-
-    <!-- Services Section End -->
-
-
-
-
-
-    <!-- Track Section Begin Music Tracks -->
-    <section class="track spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="section-title">
-                        <h2>Latest tracks</h2>
-                        <h1>Music podcast</h1>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="track__all">
-                        <a href="/mixcloud/all-songs" class="primary-btn border-btn">View all tracks</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-7 p-0">
-                    <div class="track__content nice-scroll">
-                        @foreach ($songs as $item)
-                            <div class="single_player_container">
-                                <div class="d-flex justify-content-between">
-                                    <h4>{{ $item->title }}</h4>
-                                    <span class="mr-5">Track #{{ $item->track }}</span>
-                                </div>
-                                <audio src="storage/songs/{{ $item->song_path }}" controls
-                                    style="width: 90%"></audio>
-                                   <a href="/mixcloud/song-to-playlist/{{$item->sid}}"><button type="button" style="background: #f1f2f4; border-radius: 30px;" class="btn-custom"><i class="fa fa-plus"></i> Add to playlist</button></a> 
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="col-lg-5 p-0">
-                    <div class="track__pic">
-                        <img src="{{ url('/web-img/track-right.jpg') }}">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Track Section End -->
-
-    <!-- Youtube Section Begin -->
-    <section class="youtube spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Videos feed</h2>
-                        <h1>Latest videos</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                @foreach ($videos as $items)
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="youtube__item">
-                            <div class="youtube__item__pic set-bg" data-setbg="/web-img/youtube/youtube-1.jpg">
-                                <a href="" data-toggle="modal"
-                                    data-target="#verticalModal{{ $items->vid }}" class="play-btn"><i
-                                        class="fa fa-play"></i></a>
-
-                            </div>
-                            <div class="youtube__item__text">
-                                <h4>{{ $items->title }}</h4>
-                            </div>
-                            <a href="/mixcloud/video-to-playlist/{{$items->vid}}"><button type="button" style="background: #f1f2f4; border-radius: 30px;" class="btn-custom mb-3 ml-3"><i class="fa fa-plus"></i> Add to playlist</button></a>
-                        </div>
-                        <div class="modal fade" id="verticalModal{{ $items->vid }}" tabindex="-1" role="dialog"
-                            aria-labelledby="verticalModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="verticalModalTitle">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <video src="storage/videos/{{ $items->video_path }}" width="100%"
-                                            controls></video>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn mb-2 btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    <!-- Youtube Section End -->
 
     <!-- Countdown Section Begin -->
     <section class="countdown spad set-bg" data-setbg="/web-img/countdown-bg.jpg">
