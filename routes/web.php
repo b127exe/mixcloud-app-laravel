@@ -48,6 +48,13 @@ Route::group(["prefix" => "dashboard"],function(){
   Route::get('/delete-video/{id}',[SongVideoController::class , 'videoDelete']);
   Route::get('/update-video/{id}',[SongVideoController::class , 'videoUpdate']);
   Route::post('/update-store-video/{id}',[SongVideoController::class , 'videoUpdateStore']);
+  //Others Routes
+  Route::get('/calender',[SongVideoController::class , 'calender']);
+  Route::get('/profile-overview',[SongVideoController::class , 'overview']);
+  //Playlist Routes
+  Route::get('/sort-playlist',[SongVideoController::class , 'playlistSort']);
+  Route::get('/update-playlist/{id}',[SongVideoController::class , 'playlistUpdate']);
+  Route::post('/update-playlist-store/{id}',[SongVideoController::class , 'playlistUpdateStore']);
 });
 
 Route::group(["prefix" => "mixcloud"],function(){
@@ -75,6 +82,7 @@ Route::group(["prefix" => "mixcloud"],function(){
    Route::get('/about',[WebController::class , 'about']);
    Route::get('/contact',[WebController::class , 'contact']);
    Route::get('/setting',[WebController::class , 'setting']);
+   Route::get('/all-reviews',[WebController::class , 'allReviews']);
 });
 
 Route::get('/login',[UserController::class , 'Login']);
@@ -92,5 +100,6 @@ Route::get('/',function(){
 Route::get('/destroy',function(){
     
    session()->flush();
+   return redirect('/');
 
 });

@@ -329,5 +329,17 @@ class WebController extends Controller
 
   }
 
+  public function allReviews(){
+
+    $id = session()->get('id');
+
+   $reviewSong = DB::table('song_interacts')->join('songs','song_interacts.song_id','=','songs.sid')->select('song_interacts.*','songs.*')->where('song_interacts.user_id','=',"$id")->get();
+
+   $reviewVideo = DB::table('video_interacts')->join('videos','video_interacts.video_id','=','videos.vid')->select('video_interacts.*','videos.*')->where('video_interacts.user_id','=',"$id")->get(); 
+
+   return view('website.allReviews',compact('reviewSong','reviewVideo'));
+
+  }
+
 
 }

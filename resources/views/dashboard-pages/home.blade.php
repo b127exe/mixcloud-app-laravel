@@ -49,46 +49,152 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12 mx-auto">
-                <div class="row">
-                    <div class="col-md-3 my-4">
-                      <div class="card shadow">
-                        <div class="card-body text-center">
-                          <p class="small mb-3"><strong>Songs</strong></p>
-                          {{-- <div id="gauge1" class="gauge-container mx-auto">
-                          </div> --}}
-                        </div> 
-                      </div> 
-                    </div> 
-                    <div class="col-md-3 my-4">
-                      <div class="card shadow">
-                        <div class="card-body text-center">
-                          <p class="small mb-3"><strong>Videos</strong></p>
-                          {{-- <div id="gauge2" class="gauge-container mx-auto">
-                          </div> --}}
-                        </div> 
-                      </div> 
-                    </div> 
-                    <div class="col-md-3 my-4">
-                      <div class="card shadow">
-                        <div class="card-body text-center">
-                          <p class="small mb-3"><strong>Albums</strong></p>
-                          {{-- <div id="gauge3" class="gauge-container g3 mx-auto">
-                          </div> --}}
-                        </div> 
+              <h2 class="h5 page-title">Mixcloud Analytics</h2>
+              <p class="text-muted">This primitive is meant to make it easy to display both user-centric or activity-centric actions in your app.</p>
+              <div class="row">
+                <div class="col-md-6 col-xl-3 mb-4">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary">
+                            <i class="fe fe-16 fe-music text-white mb-0"></i>
+                          </span>
+                        </div>
+                        <div class="col pr-0">
+                          <p class="small text-muted mb-0">Songs</p>
+                          <span class="h3 mb-0">{{$songs}}%</span>
+                        </div>
                       </div>
-                    </div> 
-                    <div class="col-md-3 my-4">
-                      <div class="card shadow">
-                        <div class="card-body text-center">
-                          <p class="small mb-3"><strong>Users</strong></p>
-                          {{-- <div id="gauge4" class="gauge-container g4 mx-auto">
-                            <span class="value-text text-muted small">MB/s</span>
-                          </div> --}}
-                        </div> 
-                      </div> 
-                    </div> 
+                    </div>
                   </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary">
+                            <i class="fe fe-16 fe-video text-white mb-0"></i>
+                          </span>
+                        </div>
+                        <div class="col pr-0">
+                          <p class="small text-muted mb-0">Videos</p>
+                          <span class="h3 mb-0">{{$videos}}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary">
+                            <i class="fe fe-16 fe-star text-white mb-0"></i>
+                          </span>
+                        </div>
+                        <div class="col">
+                          <p class="small text-muted mb-0">Artists</p>
+                          <div class="row align-items-center no-gutters">
+                            <div class="col-auto">
+                              <span class="h3 mr-2 mb-0">{{$allArtists}}%</span>
+                            </div>
+                            <div class="col-md-12 col-lg">
+                              <div class="progress progress-sm mt-2" style="height:3px">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{$allArtists}}%" aria-valuenow="{{$allArtists}}" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4">
+                  <div class="card shadow">
+                    <div class="card-body">
+                      <div class="row align-items-center">
+                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary">
+                            <i class="fe fe-16 fe-users text-white mb-0"></i>
+                          </span>
+                        </div>
+                        <div class="col">
+                          <p class="small text-muted mb-0">Users</p>
+                          <span class="h3 mb-0">{{$users}}</span>
+                          <span class="small text-success"> accounts</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+             <div class="row">
+              <div class="col-md-6 col-xl-6 mb-4">
+                <div class="card shadow">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-3 text-center">
+                        <span class="circle circle-lg bg-primary">
+                          <i class="fe fe-16 fe-book-open text-white mb-0" style="font-size: 42px;"></i>
+                        </span>
+                      </div>
+                      <div class="col">
+                        <p class="small text-muted mb-0">Albums</p>
+                        <div class="row align-items-center no-gutters">
+                          <div class="col-auto">
+                            <span class="h3 mr-2 mb-0">{{$albums}}%</span>
+                          </div>
+                          <div class="col-md-12 col-lg">
+                            <div class="progress progress-sm mt-2" style="height:3px">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: {{$albums}}%" aria-valuenow="{{$albums}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-6 mb-4">
+                <div class="card shadow">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-3 text-center">
+                        <span class="circle circle-lg bg-primary">
+                          <i class="fe fe-16 fe-folder text-white mb-0" style="font-size: 42px;"></i>
+                        </span>
+                      </div>
+                      <div class="col">
+                        <p class="small text-muted mb-0">Playlists</p>
+                        <div class="row align-items-center no-gutters">
+                          <div class="col-auto">
+                            <span class="h3 mr-2 mb-0">{{$playlists}}%</span>
+                          </div>
+                          <div class="col-md-12 col-lg">
+                            <div class="progress progress-sm mt-2" style="height:3px">
+                              <div class="progress-bar bg-success" role="progressbar" style="width: {{$playlists}}%" aria-valuenow="{{$playlists}}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+             <div class="my-4">
+              <div id="lineChart"></div>
+            </div>
             </div>
         </div>
+        
     </div>
+@endsection
+@section('script')
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 @endsection

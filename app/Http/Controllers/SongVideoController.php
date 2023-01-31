@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Playlist;
 use App\Models\Song;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -20,7 +21,14 @@ class SongVideoController extends Controller
    public function index()
    {
       $artist = Artist::all();
-      return view('dashboard-pages.home')->with('artist', $artist);
+      $songs = DB::table('songs')->count();
+      $videos = DB::table('videos')->count();
+      $allArtists = DB::table('artists')->count();
+      $users = DB::table('users')->count();
+      $albums = DB::table('albums')->count();
+      $playlists = DB::table('playlists')->count();
+
+      return view('dashboard-pages.home',compact('artist','songs','videos','allArtists','users','albums','playlists'));
    }
 
    //return add artist page
@@ -72,50 +80,47 @@ class SongVideoController extends Controller
       }
    }
 
-   public function artistUpdate($id){
+   public function artistUpdate($id)
+   {
 
-    $findArtist =  Artist::find($id);
-    $artist =  Artist::all();
+      $findArtist =  Artist::find($id);
+      $artist =  Artist::all();
 
-    return view('dashboard-pages.artist.updateArtist',compact('findArtist','artist'));
-       
+      return view('dashboard-pages.artist.updateArtist', compact('findArtist', 'artist'));
    }
 
-   public function artistUpdateStore(Request $request , $id){
+   public function artistUpdateStore(Request $request, $id)
+   {
 
       $validator = Validator::make($request->all(), [
          'name' => 'required|max:191',
          'newImage' => 'required|image|mimes:png,jpg,jpeg|max:2048',
       ]);
 
-     $artist = Artist::find($id);
-     
-     $artist->artist_name = $request->input('name');
+      $artist = Artist::find($id);
 
-     if($request->hasFile('newImage')){
+      $artist->artist_name = $request->input('name');
 
-      $img = $request->file('newImage');
-      $imgName = $img->getClientOriginalName();
-      $imgName = Str::random(8) . $imgName;
-      $img->move('storage/artist-images/', $imgName);
-      unlink('storage/artist-images/'.$request->input('oldImage'));
+      if ($request->hasFile('newImage')) {
 
-     }
-     else{
+         $img = $request->file('newImage');
+         $imgName = $img->getClientOriginalName();
+         $imgName = Str::random(8) . $imgName;
+         $img->move('storage/artist-images/', $imgName);
+         unlink('storage/artist-images/' . $request->input('oldImage'));
+      } else {
 
-      $imgName = $request->input('oldImage');
+         $imgName = $request->input('oldImage');
+      }
+      $artist->artist_picture = $imgName;
+      $artist->save();
 
-     }
-     $artist->artist_picture = $imgName;
-     $artist->save();
+      return response()->json([
 
-     return response()->json([
+         'status' => 200,
+         'message' => "Update Successfully"
 
-        'status' => 200,
-        'message' => "Update Successfully"
-
-     ]);
-
+      ]);
    }
 
    public function artistSort(Request $request)
@@ -185,16 +190,17 @@ class SongVideoController extends Controller
       }
    }
 
-   public function albumUpdate($id){
+   public function albumUpdate($id)
+   {
 
-     $artist = Artist::all();
-     $findAlbum = Album::find($id);
+      $artist = Artist::all();
+      $findAlbum = Album::find($id);
 
-     return view('dashboard-pages.album.updateAlbum',compact("artist","findAlbum"));
-
+      return view('dashboard-pages.album.updateAlbum', compact("artist", "findAlbum"));
    }
 
-   public function albumUpdateStore(Request $request , $id){
+   public function albumUpdateStore(Request $request, $id)
+   {
 
       $validator = Validator::make($request->all(), [
          'coverName' => 'required|max:191',
@@ -204,37 +210,33 @@ class SongVideoController extends Controller
 
       $album = Album::find($id);
 
-      if($album != null){
+      if ($album != null) {
 
-        $album->album_name = $request->input('coverName');
-        $album->artist_id = $request->input('artist');
+         $album->album_name = $request->input('coverName');
+         $album->artist_id = $request->input('artist');
 
-        if($request->hasFile('newCoverImage')){
+         if ($request->hasFile('newCoverImage')) {
 
-         $img = $request->file('newCoverImage');
-         $imgName = $img->getClientOriginalName();
-         $imgName = Str::random(8) . $imgName;
-         $img->move('storage/album-covers/', $imgName);
-         unlink('storage/album-covers/'.$request->input('oldCoverPicture'));
+            $img = $request->file('newCoverImage');
+            $imgName = $img->getClientOriginalName();
+            $imgName = Str::random(8) . $imgName;
+            $img->move('storage/album-covers/', $imgName);
+            unlink('storage/album-covers/' . $request->input('oldCoverPicture'));
+         } else {
 
-        } else {
+            $imgName = $request->input('oldCoverPicture');
+         }
 
-         $imgName = $request->input('oldCoverPicture');
+         $album->cover_picture = $imgName;
+         $album->save();
 
-        }
+         return response()->json([
 
-        $album->cover_picture = $imgName;
-        $album->save();
+            'status' => 200,
+            'message' => "Update Successfully"
 
-        return response()->json([
-
-         'status' => 200,
-         'message' => "Update Successfully"
- 
-      ]);
-
+         ]);
       }
-
    }
 
    public function albumSort(Request $request)
@@ -317,17 +319,18 @@ class SongVideoController extends Controller
       }
    }
 
-   public function songUpdate($id){
+   public function songUpdate($id)
+   {
 
-     $artist = Artist::all();
-     $findSong = Song::find($id);
-     $album = Album::all();
+      $artist = Artist::all();
+      $findSong = Song::find($id);
+      $album = Album::all();
 
-     return view('dashboard-pages.song.updateSong',compact('artist','album','findSong'));
-
+      return view('dashboard-pages.song.updateSong', compact('artist', 'album', 'findSong'));
    }
 
-   public function songUpdateStore(Request $request , $id){
+   public function songUpdateStore(Request $request, $id)
+   {
 
       $validator = Validator::make($request->all(), [
          'title' => 'required|max:50',
@@ -341,8 +344,8 @@ class SongVideoController extends Controller
       ]);
 
       $uSong = Song::find($id);
-      
-      if($uSong != null){
+
+      if ($uSong != null) {
 
          $uSong->title = $request->input('title');
          $uSong->lyrics = $request->input('lyrics');
@@ -352,14 +355,13 @@ class SongVideoController extends Controller
          $uSong->album_id = $request->input('album');
          $uSong->artist_id = $request->input('artist');
 
-         if($request->hasFile('Newsong')){
+         if ($request->hasFile('Newsong')) {
             $songs = $request->file('Newsong');
             $songName = $songs->getClientOriginalName();
             $songName = Str::random(8) . $songName;
             $songs->move('storage/songs/', $songName);
-            unlink('storage/songs/'.$request->input('oldSong'));
-         }
-         else{
+            unlink('storage/songs/' . $request->input('oldSong'));
+         } else {
             $songName = $request->input('oldSong');
          }
 
@@ -370,9 +372,7 @@ class SongVideoController extends Controller
             'message' => "Updated Successfully"
 
          ]);
-
       }
-
    }
 
    public function songSort(Request $request)
@@ -405,15 +405,16 @@ class SongVideoController extends Controller
    }
 
    //Video Code Start
-   public function addVideo(){
+   public function addVideo()
+   {
 
       $artist = Artist::all();
       $album = Album::all();
-      return view('dashboard-pages.video.addVideo',compact("artist","album"));
-
+      return view('dashboard-pages.video.addVideo', compact("artist", "album"));
    }
-   public function videoStore(Request $request){
-      
+   public function videoStore(Request $request)
+   {
+
       $validator = Validator::make($request->all(), [
          'title' => 'required|max:50',
          'description' => 'required',
@@ -429,46 +430,45 @@ class SongVideoController extends Controller
             'errors' => $validator->messages()
 
          ]);
-      } else{
+      } else {
 
-       $video = new Video;
-       $video->title = $request->input('title');
-       $video->description = $request->input('description');
-       $video->duration = $request->input('duration');
-       $video->album_id = $request->input('album');
-       $video->artist_id = $request->input('artist');
+         $video = new Video;
+         $video->title = $request->input('title');
+         $video->description = $request->input('description');
+         $video->duration = $request->input('duration');
+         $video->album_id = $request->input('album');
+         $video->artist_id = $request->input('artist');
 
-       if ($request->hasFile('video')) {
-         $vid = $request->file('video');
-         $vidName = $vid->getClientOriginalName();
-         $vidName = Str::random(8) . $vidName;
-         $vid->move('storage/videos/', $vidName);
-         $video->video_path = $vidName;
+         if ($request->hasFile('video')) {
+            $vid = $request->file('video');
+            $vidName = $vid->getClientOriginalName();
+            $vidName = Str::random(8) . $vidName;
+            $vid->move('storage/videos/', $vidName);
+            $video->video_path = $vidName;
+         }
+
+         $video->save();
+         return response()->json([
+
+            'status' => 200,
+            'message' => "Add Successfully"
+
+         ]);
       }
-
-       $video->save();
-       return response()->json([
-
-         'status' => 200,
-         'message' => "Add Successfully"
-
-      ]);
-
-      }
-
    }
 
-   public function videoUpdate($id){
+   public function videoUpdate($id)
+   {
 
-    $artist = Artist::all();
-    $album = Album::all();
-    $findVideo = Video::find($id);
+      $artist = Artist::all();
+      $album = Album::all();
+      $findVideo = Video::find($id);
 
-    return view('dashboard-pages.video.updateVideo',compact('artist','album','findVideo'));
-
+      return view('dashboard-pages.video.updateVideo', compact('artist', 'album', 'findVideo'));
    }
 
-   public function videoUpdateStore(Request $request , $id){
+   public function videoUpdateStore(Request $request, $id)
+   {
 
       $validator = Validator::make($request->all(), [
          'title' => 'required|max:50',
@@ -478,50 +478,123 @@ class SongVideoController extends Controller
          'album' => 'required',
          'video' => 'required',
       ]);
-      
+
       $fVideo = Video::find($id);
 
-      if($fVideo != null){
+      if ($fVideo != null) {
 
-        $fVideo->title = $request->input('title');
-        $fVideo->description = $request->input('description');
-        $fVideo->duration = $request->input('duration');
-        $fVideo->artist_id = $request->input('artist');
-        $fVideo->album_id = $request->input('album');
-        $fVideo->video_path = $request->input('video');
-        $fVideo->save();
-        
-        return response()->json([
+         $fVideo->title = $request->input('title');
+         $fVideo->description = $request->input('description');
+         $fVideo->duration = $request->input('duration');
+         $fVideo->artist_id = $request->input('artist');
+         $fVideo->album_id = $request->input('album');
+         $fVideo->video_path = $request->input('video');
+         $fVideo->save();
 
-         'status' => 200,
-         'message' => "Add Successfully"
+         return response()->json([
 
-      ]);
+            'status' => 200,
+            'message' => "Add Successfully"
 
+         ]);
       }
-
    }
 
-   public function videoSort(Request $request){
- 
-       $search = $request['search'];
+   public function videoSort(Request $request)
+   {
+
+      $search = $request['search'];
 
       $artist = Artist::all();
-      $videos = DB::table('videos')->join('artists', 'videos.artist_id', '=', 'artists.artist_id')->join('albums', 'videos.album_id', '=', 'albums.album_id')->select('videos.*', 'artists.*', 'albums.*')->where('title','like',"%$search%")->get();
-      return view('dashboard-pages.video.sortVideo',compact('artist','videos'));
+      $videos = DB::table('videos')->join('artists', 'videos.artist_id', '=', 'artists.artist_id')->join('albums', 'videos.album_id', '=', 'albums.album_id')->select('videos.*', 'artists.*', 'albums.*')->where('title', 'like', "%$search%")->get();
+      return view('dashboard-pages.video.sortVideo', compact('artist', 'videos'));
    }
 
-   public function videoDelete($id){
+   public function videoDelete($id)
+   {
 
-    $video =  Video::find($id);
+      $video =  Video::find($id);
 
-    if($video !=  null){
+      if ($video !=  null) {
 
-      unlink('storage/videos/'.$video->video_path);
-      $video->delete();
-      return redirect('/dashboard/sort-video');
+         unlink('storage/videos/' . $video->video_path);
+         $video->delete();
+         return redirect('/dashboard/sort-video');
+      }
+   }
 
-    }
+   //Other Routes Methods
 
+   public function calender()
+   {
+
+      $artist =  Artist::all();
+
+      return view('dashboard-pages.others.calender')->with('artist', $artist);
+   }
+
+   public function overview(){
+
+      $artist =  Artist::all();
+
+      return view('dashboard-pages.others.profileOverview',compact('artist'));
+
+   }
+
+   //Playlist Code Start here
+
+   public function playlistSort(Request $request)
+   {
+
+      $search = $request['search'];
+
+      $artist = Artist::all();
+
+      if ($search != null) {
+
+         $playlist = DB::table("playlists")->join('users', 'playlists.user_id', '=', 'users.uid')->select('playlists.*', 'users.*')->where('playlists.playlist_name', 'like', "%$search%")->get();
+      } else {
+
+         $playlist = DB::table("playlists")->join('users', 'playlists.user_id', '=', 'users.uid')->select('playlists.*', 'users.*')->get();
+      }
+
+      return view('dashboard-pages.playlist.sortPlaylist', compact('artist', 'playlist'));
+   }
+
+   public function playlistUpdate($id)
+   {
+
+      $artist = Artist::all();
+
+      $playlist = DB::table("playlists")->join('users', 'playlists.user_id', '=', 'users.uid')->select('playlists.*', 'users.*')->where('playlists.pid', '=', "$id")->get();
+
+      return view('dashboard-pages.playlist.updatePlaylist', compact('artist', 'playlist'));
+   }
+
+   public function playlistUpdateStore(Request $request, $id)
+   {
+
+      $validator = Validator::make($request->all(), [
+         'playlist' => 'required',
+         'bio' => 'required',
+         'uid' => 'required',
+      ]);
+
+      $findPlaylist = Playlist::find($id);
+
+      if ($findPlaylist != null) {
+
+         $findPlaylist->playlist_name = $request->input('playlist');
+         $findPlaylist->bio = $request->input('bio');
+         $findPlaylist->user_id = $request->input('uid');
+         $findPlaylist->save();
+
+         return response()->json([
+
+            'status' => 200,
+            'message' => "Add Successfully"
+
+         ]);
+      }
    }
 }

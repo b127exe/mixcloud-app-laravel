@@ -37,9 +37,6 @@
         <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
           <i class="fe fe-menu navbar-toggler-icon"></i>
         </button>
-        <form class="form-inline mr-auto searchform text-muted">
-          <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search" placeholder="Type something..." aria-label="Search">
-        </form>
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
@@ -51,12 +48,6 @@
               <span class="fe fe-grid fe-16"></span>
             </a>
           </li>
-          <li class="nav-item nav-notif">
-            <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
-              <span class="fe fe-bell fe-16"></span>
-              <span class="dot dot-md bg-success"></span>
-            </a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="avatar avatar-sm mt-2">
@@ -64,8 +55,7 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
+              <a class="dropdown-item" href="/dashboard/profile-overview">Profile</a>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
           </li>
@@ -147,17 +137,25 @@
                 <i class="fe fe-check-square fe-16"></i>
                 <span class="ml-3 item-text">Playlist</span>
               </a> 
-              <ul class="collapse list-unstyled pl-4 w-100" id="play">
+              <ul class="collapse list-unstyled pl-4 w-100" id="play">               
                 <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Add Playlist</span>
-                  </a>
-                </li>               
-                <li class="nav-item">
-                  <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Sort Playlist</span>
+                  <a class="nav-link pl-3" href="/dashboard/sort-playlist"><span class="ml-1 item-text">Sort Playlist</span>
                   </a>
                 </li>               
               </ul>
           </li>         
+          </ul>
+
+          <p class="text-muted nav-heading mt-4 mb-1">
+            <span>Date Componets</span>
+          </p>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item ">
+              <a href="/dashboard/calender" aria-expanded="false" class="nav-link">
+                <i class="fe fe-calendar fe-16"></i>
+                <span class="ml-3 item-text">Calender</span><span class="sr-only">(current)</span>
+              </a>
+            </li>
           </ul>
           
         </nav>
@@ -176,7 +174,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="defaultModalLabel">Shortcuts</h5>
+              <h5 class="modal-title" id="defaultModalLabel">Quick Access</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -184,44 +182,44 @@
             <div class="modal-body px-5">
               <div class="row align-items-center">
                 <div class="col-6 text-center">
-                  <div class="squircle bg-success justify-content-center">
-                    <i class="fe fe-cpu fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Control area</p>
+                  <a href="/dashboard/sort-song" style="text-decoration: none;"><div class="squircle bg-success justify-content-center">
+                    <i class="fe fe-music fe-32 align-self-center text-white"></i>
+                  </div></a>
+                  <p>Songs</p>
                 </div>
                 <div class="col-6 text-center">
-                  <div class="squircle bg-primary justify-content-center">
+                  <a href="/dashboard/sort-video" style="text-decoration: none;"> <div class="squircle bg-success justify-content-center">
+                    <i class="fe fe-video fe-32 align-self-center text-white"></i>
+                  </div></a>
+                  <p>Videos</p>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-6 text-center">
+                  <a href="/dashboard/sort-artist" style="text-decoration: none;"><div class="squircle bg-success justify-content-center">
+                    <i class="fe fe-star fe-32 align-self-center text-white"></i>
+                  </div></a>
+                  <p>Artists</p>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="/dashboard/sort-album" style="text-decoration: none;"><div class="squircle bg-success justify-content-center">
+                    <i class="fe fe-book-open fe-32 align-self-center text-white"></i>
+                  </div></a>
+                  <p>Albums</p>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-6 text-center">
+                  <a href="/dashboard/calender" style="text-decoration: none;"><div class="squircle bg-success justify-content-center">
+                    <i class="fe fe-calendar fe-32 align-self-center text-white"></i>
+                  </div></a>
+                  <p>Calender</p>
+                </div>
+                <div class="col-6 text-center">
+                  <a href="/dashboard/profile-overview" style="text-decoration: none;"><div class="squircle bg-success justify-content-center">
                     <i class="fe fe-activity fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Activity</p>
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <div class="col-6 text-center">
-                  <div class="squircle bg-primary justify-content-center">
-                    <i class="fe fe-droplet fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Droplet</p>
-                </div>
-                <div class="col-6 text-center">
-                  <div class="squircle bg-primary justify-content-center">
-                    <i class="fe fe-upload-cloud fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Upload</p>
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <div class="col-6 text-center">
-                  <div class="squircle bg-primary justify-content-center">
-                    <i class="fe fe-users fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Users</p>
-                </div>
-                <div class="col-6 text-center">
-                  <div class="squircle bg-primary justify-content-center">
-                    <i class="fe fe-settings fe-32 align-self-center text-white"></i>
-                  </div>
-                  <p>Settings</p>
+                  </div></a>
+                  <p>Overview</p></div>
                 </div>
               </div>
             </div>

@@ -119,6 +119,7 @@
                                 </li>
                                 <li><a href="/mixcloud/about">About</a></li>
                                 <li class="active"><a href="/mixcloud/contact">Contact</a></li>
+                                <li><a href="/mixcloud/all-reviews">Reviews</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="/mixcloud/setting">Setting</a></li>

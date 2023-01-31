@@ -119,6 +119,7 @@
                                 </li>
                                 <li><a href="/mixcloud/about">About</a></li>
                                 <li><a href="/mixcloud/contact">Contact</a></li>
+                                <li><a href="/mixcloud/all-reviews">Reviews</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="/mixcloud/setting">Setting</a></li>
@@ -271,7 +272,7 @@
                 @foreach ($videos as $items)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="youtube__item">
-                            <div class="youtube__item__pic set-bg" data-setbg="/web-img/youtube/youtube-1.jpg">
+                            <div class="youtube__item__pic set-bg" data-setbg="/web-img/youtube/youtube-2.jpg">
                                 <a href="" data-toggle="modal"
                                     data-target="#verticalModal{{ $items->vid }}" class="play-btn"><i
                                         class="fa fa-play"></i></a>

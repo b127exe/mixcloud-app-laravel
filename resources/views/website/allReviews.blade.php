@@ -36,6 +36,18 @@
             line-height: 1.5;
             border-radius: 0.25rem;
         }
+
+        .like__btn {
+            width: 100%;
+            padding: 10px 15px;
+            background: #7300ff;
+            font-size: 18px;
+            border-radius: 5px;
+            color: #e8efff;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -95,7 +107,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/mixcloud">Home</a></li>
+                                <li><a href="/mixcloud">Home</a></li>
                                 <li><a href="/mixcloud/all-songs">Songs</a></li>
                                 <li><a href="/mixcloud/all-videos">Videos</a></li>
                                 <li><a href="#">Playlist</a>
@@ -107,7 +119,7 @@
                                 </li>
                                 <li><a href="/mixcloud/about">About</a></li>
                                 <li><a href="/mixcloud/contact">Contact</a></li>
-                                <li><a href="/mixcloud/all-reviews">Reviews</a></li>
+                                <li class="active"><a href="/mixcloud/all-reviews">Reviews</a></li>
                                 <li><a href="#"><i class="fa fa-user"></i></a>
                                     <ul class="dropdown">
                                         <li><a href="/mixcloud/setting">Setting</a></li>
@@ -137,7 +149,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="hero__text">
-                        <span>Playlists</span>
+                        <span>All Reviews</span>
                         <h1>Feel the heart beats</h1>
                     </div>
                 </div>
@@ -148,40 +160,94 @@
         </div>
     </section>
     <!-- Hero Section End -->
-
-    <!-- Event Section Begin  Also Latest Artist-->
-    <section class="event spad">
+    
+    <!-- Track Section Begin -->
+    <section class="track spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-7">
                     <div class="section-title">
-                        <h2>Popular Artists</h2>
+                        <h2>Songs Reviews</h2>
+                        <h1>Reviews</h1>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="track__all">
+                        <a href="/mixcloud" class="primary-btn border-btn">Go Back</a>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="event__slider owl-carousel">
-                    @foreach ($playlist as $item)
-                        <div class="col-lg-4">
-                            <div class="event__item">
-
-                                <div class="event__item__pic set-bg"
-                                    data-setbg="{{ url('/assets/products/p4.jpg') }}">
-                                </div>
-                                <div class="event__item__text">
-                                    <a href="/mixcloud/playlist-detail/{{$item->pid}}">
-                                        <h4>{{ $item->playlist_name }}</h4>
-                                    </a>
-                                    {{-- <p><i class="fa fa-music"></i>Mixcloud Artist</p> --}}
-                                </div>
+                <div class="col-lg-7 p-0">
+                    <div class="track__content nice-scroll">
+                        @foreach ($reviewSong as $items)
+                        <div class="single_player_container">
+                            <h4>Title: {{$items->title}}</h4>
+                            <div class="d-flex justify-content-between">
+                                <p>Reaction: @if ($items->song_like == 1)
+                                    Like
+                                    @else Unlike
+                                @endif</p>
+                                <p class="mr-4">Date: {{$items->created_at}}</p>    
                             </div>
+                            <p>Review: {{$items->review}}</p>    
                         </div>
-                    @endforeach
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-lg-5 p-0">
+                    <div class="track__pic">
+                        <img src="/web-img/track-right.jpg" alt="">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Event Section End -->
+    <!-- Track Section End -->
+
+    <!-- Track Section Begin -->
+    <section class="track spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="section-title">
+                        <h2>Videos Reviews</h2>
+                        <h1>Reviews</h1>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="track__all">
+                        <a href="/mixcloud" class="primary-btn border-btn">Go Back</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 p-0">
+                    <div class="track__pic">
+                        <img src="/web-img/track-right.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-7 p-0">
+                    <div class="track__content nice-scroll">
+                        @foreach ($reviewVideo as $items)
+                        <div class="single_player_container ml-4">
+                            <h4>Title: {{$items->title}}</h4>
+                            <div class="d-flex justify-content-between">
+                                <p>Reaction: @if ($items->video_like == 1)
+                                    Like
+                                    @else Unlike
+                                @endif</p>
+                                <p>Date: {{$items->created_at}}</p>    
+                            </div>
+                            <p>Review: {{$items->review}}</p>    
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Track Section End -->
 
     <!-- Countdown Section Begin -->
     <section class="countdown spad set-bg" data-setbg="/web-img/countdown-bg.jpg">
@@ -195,6 +261,7 @@
             </div>
     </section>
     <!-- Countdown Section End -->
+
 
     <!-- Footer Section Begin -->
     <footer class="footer spad set-bg" data-setbg="/web-img/footer-bg.png">
@@ -305,6 +372,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

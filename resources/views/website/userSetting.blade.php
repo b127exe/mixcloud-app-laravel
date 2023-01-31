@@ -39,13 +39,10 @@
             <div class="row justify-content-center">
               <div class="col-12 col-lg-10 col-xl-8">
                 <a href="/mixcloud"><button type="button" class="btn btn-primary my-4"><span class="fe fe-arrow-left fe-16 mr-2"></span>Go Back</button></a>
-                <h2 class="h3 mb-4 page-title">Settings</h2>
+                <div class="card shadow mt-5">
+                  <div class="card-body">
+                <h2 class="h3 mb-4 page-title text-center">Profile</h2><hr class="my-2">
                 <div class="my-4">
-                  <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
-                    </li>
-                  </ul>
                   <form>
                     @csrf
                     <div class="row mt-5 align-items-center">
@@ -70,6 +67,8 @@
                     </div>
                   </form>
                 </div> 
+              </div>
+              </div>
               </div> 
             </div> 
           </div> 
