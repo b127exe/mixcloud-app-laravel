@@ -12,6 +12,7 @@ use App\Models\Video_interact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class WebController extends Controller
 {
@@ -325,7 +326,71 @@ class WebController extends Controller
 
   public function setting(){
 
-   return view('website.userSetting');
+    $id = session()->get('id');
+
+    $dateUser = User::find($id);
+
+   return view('website.userSetting')->with('uid',$id);
+
+  }
+
+  public function settingStore(Request $request){
+
+    $validator = Validator::make($request->all(), [
+      'name' => 'required|max:191',
+      'email' => 'required|email',
+      'password' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+
+      return response()->json([
+
+        'status' => 400,
+        'errors' => $validator->messages()
+
+      ]);
+    }
+    else{
+
+    $id = $request->input('id');
+
+    $findUser = User::find($id);
+
+    if($findUser != null){
+
+      $findUser->name = $request->input('name');
+      $findUser->email = $request->input('email');
+      $findUser->password = md5($request->input('password'));
+
+      if($request->hasFile('newImage')){
+
+       $img = $request->file('newImage');
+       $imgName = $img->getClientOriginalName();
+       $imgName = Str::random(8).$imgName;
+       $img->move('storage/users-images/',$imgName);
+       unlink('storage/users-images/'.$request->input('olgImage'));
+
+      }
+      else{
+
+       $imgName = $request->input('olgImage');
+
+      }
+
+      $findUser->profile_photo = $imgName;
+      $findUser->save();
+
+      return response()->json([
+
+        'status' => 200,
+        'message' => "Add Successfully"
+  
+      ]);
+       
+    }
+
+    }
 
   }
 

@@ -100,7 +100,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="header__logo">
-                        <a href=""><img src="{{ url('/assets/logo/logo-2.png') }}" width="60%"></a>
+                        <a href=""><img src="{{ url('/assets/logo/logo-2.png') }}"></a>
                     </div>
                 </div>
                 <div class="col-lg-10 col-md-10">

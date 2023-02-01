@@ -34,12 +34,17 @@ class UserController extends Controller
 
         // echo $user[0]->password;
 
-        session()->put(['name'=> $user[0]->name ,'email' => $user[0]->email, 'photo' => $user[0]->profile_photo, 'id' => $user[0]->uid, 'role' => $user[0]->role]);
-
-        if (session()->get('role') == 1) {
-            return redirect('/dashboard');
-        } else {
-            return redirect('/mixcloud');
+        if($user){
+   
+            session()->put(['name'=> $user[0]->name ,'email' => $user[0]->email, 'photo' => $user[0]->profile_photo, 'id' => $user[0]->uid, 'role' => $user[0]->role]);
+            
+            if (session()->get('role') == 1) {
+                return redirect('/dashboard');
+            } 
+            else {
+                return redirect('/mixcloud');
+            }
+            
         }
     }
 
@@ -82,4 +87,6 @@ class UserController extends Controller
 
         }
     }
+
+    
 }

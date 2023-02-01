@@ -365,6 +365,7 @@ class SongVideoController extends Controller
             $songName = $request->input('oldSong');
          }
 
+         $uSong->song_path = $songName;
          $uSong->save();
          return response()->json([
 
