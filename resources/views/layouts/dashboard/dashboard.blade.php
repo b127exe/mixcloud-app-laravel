@@ -55,7 +55,7 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/dashboard/profile-overview">Profile</a>
+              <a class="dropdown-item" href="/dashboard/profile-overview">Setting</a>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
           </li>
@@ -154,6 +154,18 @@
               <a href="/dashboard/calender" aria-expanded="false" class="nav-link">
                 <i class="fe fe-calendar fe-16"></i>
                 <span class="ml-3 item-text">Calender</span><span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+
+          <p class="text-muted nav-heading mt-4 mb-1">
+            <span>Users Manage</span>
+          </p>
+          <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item ">
+              <a href="/dashboard/user-manage" aria-expanded="false" class="nav-link">
+                <i class="fe fe-users fe-16"></i>
+                <span class="ml-3 item-text">Users</span><span class="sr-only">(current)</span>
               </a>
             </li>
           </ul>

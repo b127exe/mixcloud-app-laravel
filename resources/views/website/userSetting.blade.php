@@ -178,7 +178,7 @@
                                                     @csrf
                                                     <div class="alert alert-warning d-none" role="alert"
                                                         id="save_error"></div>
-                                                    <div class="form-row justify-content-around">
+                                                    <div class="form-row justify-content-around my-3">
                                                         <div class="oldImgBox">
                                                             <img
                                                                 src="/storage/users-images/{{ session()->get('photo') }}">

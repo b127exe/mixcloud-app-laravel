@@ -54,10 +54,13 @@ Route::group(["prefix" => "dashboard"],function(){
   //Others Routes
   Route::get('/calender',[SongVideoController::class , 'calender'])->middleware(['emailCheck','adminRole']);
   Route::get('/profile-overview',[SongVideoController::class , 'overview'])->middleware(['emailCheck','adminRole']);
+  Route::post('/profile-overview-store',[SongVideoController::class , 'adminProfileStore'])->middleware(['emailCheck','adminRole']);
   //Playlist Routes
   Route::get('/sort-playlist',[SongVideoController::class , 'playlistSort'])->middleware(['emailCheck','adminRole']);
   Route::get('/update-playlist/{id}',[SongVideoController::class , 'playlistUpdate'])->middleware(['emailCheck','adminRole']);
   Route::post('/update-playlist-store/{id}',[SongVideoController::class , 'playlistUpdateStore'])->middleware(['emailCheck','adminRole']);
+  //Users Manage Routes
+  Route::get('/user-manage',[SongVideoController::class , 'userManage'])->middleware(['emailCheck','adminRole']);
 });
 
 
