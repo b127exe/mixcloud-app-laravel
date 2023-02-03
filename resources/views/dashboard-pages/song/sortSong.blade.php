@@ -169,7 +169,7 @@
                                                             <p>Album ● {{ $items->album_name }}</p>
                                                             <audio
                                                                 src="{{ url('/storage/songs') }}/{{ $items->song_path }}"
-                                                                controls style="width: 100%;"></audio>
+                                                                controls type="audio/mp3" style="width: 100%;"></audio>
                                                         </div>
                                                     </div>
                                                 </div>

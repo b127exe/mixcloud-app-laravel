@@ -152,10 +152,11 @@
     <!-- Event Section Begin  Also Latest Artist-->
     <section class="event spad">
         <div class="container">
+            @if ($playlist->isNotEmpty())
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Popular Artists</h2>
+                        <h2>All Playlist</h2>
                     </div>
                 </div>
             </div>
@@ -179,6 +180,9 @@
                     @endforeach
                 </div>
             </div>
+            @else
+            <h2 class="text-center">No playlist here go back and add some..</h2>
+            @endif
         </div>
     </section>
     <!-- Event Section End -->

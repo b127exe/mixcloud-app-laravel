@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Playlist;
+use App\Models\Playlist_song;
+use App\Models\Playlist_video;
 use App\Models\Song;
 use App\Models\User;
 use App\Models\Video;
@@ -29,7 +31,7 @@ class SongVideoController extends Controller
       $albums = DB::table('albums')->count();
       $playlists = DB::table('playlists')->count();
 
-      return view('dashboard-pages.home',compact('artist','songs','videos','allArtists','users','albums','playlists'));
+      return view('dashboard-pages.home', compact('artist', 'songs', 'videos', 'allArtists', 'users', 'albums', 'playlists'));
    }
 
    //return add artist page
@@ -535,72 +537,66 @@ class SongVideoController extends Controller
       return view('dashboard-pages.others.calender')->with('artist', $artist);
    }
 
-   public function overview(){
+   public function overview()
+   {
 
       $artist =  Artist::all();
 
-      return view('dashboard-pages.others.profileOverview',compact('artist'));
-
+      return view('dashboard-pages.others.profileOverview', compact('artist'));
    }
 
-   public function adminProfileStore(Request $request){
+   public function adminProfileStore(Request $request)
+   {
 
       $validator = Validator::make($request->all(), [
          'name' => 'required|max:191',
          'email' => 'required|email',
          'password' => 'required',
-       ]);
-   
-       if ($validator->fails()) {
-   
+      ]);
+
+      if ($validator->fails()) {
+
          return response()->json([
-   
-           'status' => 400,
-           'errors' => $validator->messages()
-   
+
+            'status' => 400,
+            'errors' => $validator->messages()
+
          ]);
-       }
-       else{
+      } else {
 
          $id = $request->input('id');
-     
-         $findUser = User::find($id);
-     
-         if($findUser != null){
-     
-           $findUser->name = $request->input('name');
-           $findUser->email = $request->input('email');
-           $findUser->password = md5($request->input('password'));
-     
-           if($request->hasFile('newImage')){
-     
-            $img = $request->file('newImage');
-            $imgName = $img->getClientOriginalName();
-            $imgName = Str::random(8).$imgName;
-            $img->move('storage/users-images/',$imgName);
-            unlink('storage/users-images/'.$request->input('olgImage'));
-     
-           }
-           else{
-     
-            $imgName = $request->input('olgImage');
-     
-           }
-     
-           $findUser->profile_photo = $imgName;
-           $findUser->save();
-     
-           return response()->json([
-     
-             'status' => 200,
-             'message' => "Add Successfully"
-       
-           ]);
-            
-         }
-     
-         }
 
+         $findUser = User::find($id);
+
+         if ($findUser != null) {
+
+            $findUser->name = $request->input('name');
+            $findUser->email = $request->input('email');
+            $findUser->password = md5($request->input('password'));
+
+            if ($request->hasFile('newImage')) {
+
+               $img = $request->file('newImage');
+               $imgName = $img->getClientOriginalName();
+               $imgName = Str::random(8) . $imgName;
+               $img->move('storage/users-images/', $imgName);
+               unlink('storage/users-images/' . $request->input('olgImage'));
+            } else {
+
+               $imgName = $request->input('olgImage');
+            }
+
+            $findUser->profile_photo = $imgName;
+            $findUser->save();
+
+            return response()->json([
+
+               'status' => 200,
+               'message' => "Add Successfully"
+
+            ]);
+         }
+      }
    }
 
    //Playlist Code Start here
@@ -662,15 +658,17 @@ class SongVideoController extends Controller
 
    //User Manage work start Here!!
 
-   public function userManage(){
+   public function userManage()
+   {
 
-     $artist = Artist::all();
+      $artist = Artist::all();
 
-     $id = session()->get('id');
+      $id = session()->get('id');
 
-     $users = DB::select("select * from users where uid != ?",[$id]);
+      $users = DB::select("select * from users");
 
-     return view('dashboard-pages.users-manage.allUsers',compact('artist','users'));
-
+      return view('dashboard-pages.users-manage.allUsers', compact('artist', 'users'));
    }
-}  
+
+   
+}

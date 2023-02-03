@@ -50,8 +50,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="mb-2 page-title">All Users</h2>
-                <p class="card-text">Go sort any record and apply action.</p>
+                <h2 class="mb-2 page-title">All Users</h2><hr>
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
@@ -64,7 +63,7 @@
                                             <th>Profile Picture</th>
                                             <th>Username</th>
                                             <th>Email</th>
-                                            <th>Action</th>
+                                            <th>Role</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,17 +74,11 @@
                                                 <td>{{$items->name}}</td>
                                                 <td>{{$items->email}}</td>
                                                 <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-sm dropdown-toggle" type="button"
-                                                            id="dr1" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                            <span class="text-muted sr-only">Action</span>
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-right"
-                                                            aria-labelledby="dr1">
-                                                            <a class="delete_btn dropdown-item" href="">Delete</a>
-                                                        </div>
-                                                    </div>
+                                                    @if ($items->role == 0)
+                                                        User
+                                                        @else
+                                                        Admin
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

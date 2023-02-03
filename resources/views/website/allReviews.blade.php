@@ -164,6 +164,7 @@
     <!-- Track Section Begin -->
     <section class="track spad">
         <div class="container">
+            @if ($reviewSong->isNotEmpty())
             <div class="row">
                 <div class="col-lg-7">
                     <div class="section-title">
@@ -201,6 +202,9 @@
                     </div>
                 </div>
             </div>
+            @else
+             <h2 class="text-center">No songs review added here go explore and made some reviews..</h2>
+            @endif
         </div>
     </section>
     <!-- Track Section End -->
@@ -208,6 +212,7 @@
     <!-- Track Section Begin -->
     <section class="track spad">
         <div class="container">
+            @if ($reviewSong->isNotEmpty())
             <div class="row">
                 <div class="col-lg-7">
                     <div class="section-title">
@@ -245,6 +250,9 @@
                     </div>
                 </div>
             </div>
+            @else
+            <h2 class="text-center">No videos review added here go explore and made some reviews..</h2>
+           @endif
         </div>
     </section>
     <!-- Track Section End -->

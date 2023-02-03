@@ -121,7 +121,9 @@ class WebController extends Controller
   public function playlist()
   {
 
-    $playlist = Playlist::all();
+   $id = session()->get('id');
+
+    $playlist = DB::table('playlists')->where('user_id','=',"$id")->get();
 
     return view('website.playlist')->with('playlist', $playlist);
   }
