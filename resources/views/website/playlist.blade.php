@@ -95,7 +95,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="/mixcloud">Home</a></li>
+                                <li><a href="/mixcloud">Home</a></li>
                                 <li><a href="/mixcloud/all-songs">Songs</a></li>
                                 <li><a href="/mixcloud/all-videos">Videos</a></li>
                                 <li><a href="#">Playlist</a>
