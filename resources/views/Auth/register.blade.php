@@ -114,7 +114,7 @@
           <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
           <div class="d-flex justify-content-between mt-3">
               <p class="text-muted text-center">Copyright © 2023</p>
-              <p>Don't have an account? <a href="/login">Register</a></p>
+              <p>Already an account? <a href="/login">Register</a></p>
         </div>
         </form>
       </div>

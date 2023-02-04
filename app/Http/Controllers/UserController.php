@@ -46,6 +46,9 @@ class UserController extends Controller
             }
             
         }
+        else{
+            echo "Credentials Wrongs!";
+        }
     }
 
     public function RegisterStore(Request $request)

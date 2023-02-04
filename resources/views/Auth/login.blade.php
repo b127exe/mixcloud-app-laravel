@@ -64,7 +64,7 @@
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Let me in</button>
                 <div class="d-flex justify-content-between mt-3">
                     <p class="text-muted text-center">Copyright © 2023</p>
-                    <p>Already an account? <a href="/register">Sign In</a></p>
+                    <p>Don't have an account? <a href="/register">Sign In</a></p>
                 </div>
             </form>
         </div>

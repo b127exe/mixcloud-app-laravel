@@ -145,7 +145,7 @@
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="verticalModalTitle">Song Details</h5>
+                                                    <h5 class="modal-title" id="verticalModalTitle">Video Details</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -166,8 +166,6 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn mb-2 btn-secondary"
                                                         data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn mb-2 btn-primary">Save
-                                                        changes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,7 +174,7 @@
                                     <!-- for lyrics -->
                                     <button type="button" class="btn mb-2 btn-primary" data-toggle="modal"
                                         data-target="#verticalLyricsModal{{ $items->vid }}"><span
-                                            class="fe fe-clipboard fe-16 mr-2"></span>See Lyrics</button>
+                                            class="fe fe-clipboard fe-16 mr-2"></span>Description</button>
                                     <!-- Modal for lyrics-->
                                     <div class="modal fade" id="verticalLyricsModal{{ $items->vid }}" tabindex="-1"
                                         role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
